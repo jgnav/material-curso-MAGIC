@@ -1,10 +1,28 @@
 """Autocorrección de 1.1. Primeros pasos con Python."""
 
+from html import escape
 from math import isclose
 
 
+def _mostrar_comprobacion(mensaje, correcta):
+    """Muestra una comprobación coloreada en Colab y texto normal como respaldo."""
+
+    color = "#137333" if correcta else "#c5221f"
+    try:
+        from IPython.display import HTML, display
+    except ImportError:
+        print(mensaje)
+    else:
+        display(
+            HTML(
+                f'<p style="color: {color}; font-weight: 600; margin: 8px 0;">'
+                f"{escape(mensaje)}</p>"
+            )
+        )
+
+
 class Ejercicio:
-    """Pregunta con comprobación, pista y solución."""
+    """Pregunta con comprobación y ayuda opcional."""
 
     def __init__(self, numero, entorno, validar, pista, solucion):
         self.numero = numero
@@ -20,25 +38,32 @@ class Ejercicio:
         try:
             resultado = self._validar(self._entorno, self)
         except NameError as error:
-            print(f"Falta crear o corregir una variable: {error}")
-            return False
+            _mostrar_comprobacion(
+                f"Falta crear o corregir una variable: {error}", False
+            )
+            return
         except Exception as error:
-            print(f"El código ha producido {type(error).__name__}: {error}")
-            return False
+            _mostrar_comprobacion(
+                f"El código ha producido {type(error).__name__}: {error}", False
+            )
+            return
 
         if resultado is True:
             self.completado = True
-            print("Correcto. Puedes continuar.")
-            return True
+            _mostrar_comprobacion("Correcto. Puedes continuar.", True)
+            return
 
-        print(f"Revisa tu respuesta: {resultado}")
-        return False
+        _mostrar_comprobacion(f"Revisa tu respuesta: {resultado}", False)
 
     def pista(self):
+        if self._pista is None:
+            return
         self.pista_consultada = True
         print(f"Pista: {self._pista}")
 
     def solucion(self):
+        if self._solucion is None:
+            return
         self.solucion_consultada = True
         print("Una posible solución es:\n")
         print(self._solucion)
@@ -214,15 +239,15 @@ def cargar(entorno):
             1,
             entorno,
             _validar_q1,
-            "Solo tienes que ejecutar la celda sin modificarla.",
-            'print("Hola, mundo")',
+            None,
+            None,
         ),
         Ejercicio(
             2,
             entorno,
             _validar_q2,
-            "Guarda un texto entre comillas en la variable mensaje.",
-            'mensaje = "Hoy empiezo a programar con Python"\nprint(mensaje)',
+            None,
+            None,
         ),
         Ejercicio(
             3,
