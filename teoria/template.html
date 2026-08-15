@@ -1,0 +1,187 @@
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <p style="margin: 0 0 8px; color: #1f77b4; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;">Revisión de Python · Lección 1</p>
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">Aritmética y variables para trading</h2>
+    <p style="margin: 0; font-size: 17px;">En esta lección aprenderás a realizar cálculos básicos con Python, guardar resultados en variables y detectar errores frecuentes. Los ejemplos utilizan precios y operaciones financieras sencillas.</p>
+  </div>
+
+  <div style="padding: 20px 24px; margin-bottom: 30px; border: 1px solid #d9e2ec; border-radius: 10px; background: #ffffff;">
+    <h3 style="margin-top: 0; color: #152536;">Objetivos</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Mostrar información con <code>print()</code>.</li>
+      <li>Utilizar suma, resta, multiplicación, división y potencias.</li>
+      <li>Crear y actualizar variables.</li>
+      <li>Combinar varias variables en un cálculo financiero.</li>
+      <li>Interpretar errores básicos como <code>NameError</code>.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Mostrar información con <code>print()</code></h3>
+  <p><code>print()</code> permite mostrar texto, números y resultados. Los textos se escriben entre comillas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [1]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Python listo para analizar mercados"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [1]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Python listo para analizar mercados</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Operaciones aritméticas</h3>
+  <p>Python puede utilizarse como una calculadora. Estas son las operaciones principales:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 560px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Operación</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;">Símbolo</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;">Suma</td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>+</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>100 + 5</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>105</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;">Resta</td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>105 - 100</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>5</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;">Multiplicación</td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>*</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>25 * 4</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>100</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;">División</td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>/</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>10000 / 250</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>40.0</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;">Potencia</td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>**</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>1.02 ** 12</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Crecimiento compuesto</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Los paréntesis permiten controlar el orden del cálculo. Las potencias se calculan antes que las multiplicaciones, y las multiplicaciones antes que las sumas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [2]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">capital_inicial</span> = <span style="color: #b35c00;">10000</span>
+<span style="color: #0550ae;">rentabilidad_mensual</span> = <span style="color: #b35c00;">0.02</span>
+<span style="color: #0550ae;">meses</span> = <span style="color: #b35c00;">12</span>
+
+<span style="color: #0550ae;">capital_final</span> = <span style="color: #0550ae;">capital_inicial</span> * (<span style="color: #b35c00;">1</span> + <span style="color: #0550ae;">rentabilidad_mensual</span>) ** <span style="color: #0550ae;">meses</span>
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">capital_final</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [2]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>12682.42</code></pre>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #e5a000; background: #fff8e6; border-radius: 6px;">
+    <strong>Importante:</strong> este cálculo es únicamente un ejemplo matemático. Una rentabilidad real no es constante ni está garantizada.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Comentarios</h3>
+  <p>Un comentario explica el propósito del código. Python ignora todo lo que aparece después de <code>#</code> en esa línea.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [3]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #6e7781;"># Calcular el rendimiento simple de una operación</span>
+<span style="color: #0550ae;">rendimiento</span> = (<span style="color: #b35c00;">105</span> - <span style="color: #b35c00;">100</span>) / <span style="color: #b35c00;">100</span>
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">rendimiento</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [3]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0.05</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Variables</h3>
+  <p>Una variable asigna un nombre a un valor para poder reutilizarlo. El operador <code>=</code> realiza la asignación; no significa “es igual a” en el sentido de una ecuación matemática.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [4]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">ticker</span> = <span style="color: #0a7b3e;">"ABC"</span>
+<span style="color: #0550ae;">precio_apertura</span> = <span style="color: #b35c00;">100.0</span>
+<span style="color: #0550ae;">precio_cierre</span> = <span style="color: #b35c00;">103.5</span>
+
+<span style="color: #0550ae;">rentabilidad_pct</span> = (<span style="color: #0550ae;">precio_cierre</span> / <span style="color: #0550ae;">precio_apertura</span> - <span style="color: #b35c00;">1</span>) * <span style="color: #b35c00;">100</span>
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker</span>, <span style="color: #8250df;">round</span>(<span style="color: #0550ae;">rentabilidad_pct</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [4]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>ABC 3.5</code></pre>
+  </div>
+
+  <p>Los nombres de variables deberían ser cortos y descriptivos. Deben cumplir estas reglas:</p>
+  <ul style="padding-left: 22px;">
+    <li>No pueden contener espacios: usa <code>precio_cierre</code>, no <code>precio cierre</code>.</li>
+    <li>Solo pueden contener letras, números y guiones bajos.</li>
+    <li>No pueden comenzar por un número.</li>
+    <li>Python distingue mayúsculas y minúsculas: <code>precio</code> y <code>Precio</code> son variables distintas.</li>
+  </ul>
+
+  <h4 style="margin-top: 28px; color: #263b4f;">Actualizar una variable</h4>
+  <p>Asignar un nuevo valor reemplaza el anterior. También puedes calcular el nuevo valor utilizando el valor actual.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [5]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">capital</span> = <span style="color: #b35c00;">10000</span>
+<span style="color: #0550ae;">capital</span> = <span style="color: #0550ae;">capital</span> + <span style="color: #b35c00;">250</span>
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">capital</span>)
+
+<span style="color: #0550ae;">capital</span> = <span style="color: #0550ae;">capital</span> * <span style="color: #b35c00;">1.01</span>
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">capital</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [5]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>10250
+10352.5</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Combinar varias variables</h3>
+  <p>Dividir un cálculo largo en variables con nombres claros facilita su lectura y reduce errores. El siguiente ejemplo calcula un tamaño de posición a partir de un riesgo máximo.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Entrada [6]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">capital</span> = <span style="color: #b35c00;">10000</span>
+<span style="color: #0550ae;">riesgo_porcentaje</span> = <span style="color: #b35c00;">0.01</span>
+<span style="color: #0550ae;">precio_entrada</span> = <span style="color: #b35c00;">100</span>
+<span style="color: #0550ae;">precio_stop</span> = <span style="color: #b35c00;">98</span>
+
+<span style="color: #0550ae;">riesgo_maximo</span> = <span style="color: #0550ae;">capital</span> * <span style="color: #0550ae;">riesgo_porcentaje</span>
+<span style="color: #0550ae;">riesgo_por_accion</span> = <span style="color: #8250df;">abs</span>(<span style="color: #0550ae;">precio_entrada</span> - <span style="color: #0550ae;">precio_stop</span>)
+<span style="color: #0550ae;">numero_acciones</span> = <span style="color: #8250df;">int</span>(<span style="color: #0550ae;">riesgo_maximo</span> / <span style="color: #0550ae;">riesgo_por_accion</span>)
+<span style="color: #0550ae;">valor_posicion</span> = <span style="color: #0550ae;">numero_acciones</span> * <span style="color: #0550ae;">precio_entrada</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Riesgo máximo:"</span>, <span style="color: #0550ae;">riesgo_maximo</span>, <span style="color: #0a7b3e;">"€"</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Número de acciones:"</span>, <span style="color: #0550ae;">numero_acciones</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Valor de la posición:"</span>, <span style="color: #0550ae;">valor_posicion</span>, <span style="color: #0a7b3e;">"€"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Salida [6]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Riesgo máximo: 100.0 €
+Número de acciones: 50
+Valor de la posición: 5000 €</code></pre>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    <strong>Observa:</strong> cambiar <code>capital</code>, <code>riesgo_porcentaje</code> o los precios actualiza todo el cálculo sin tener que reescribir la fórmula completa.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Depuración: interpretar un <code>NameError</code></h3>
+  <p>Python exige que el nombre de una variable coincida exactamente con el utilizado al crearla. Un error tipográfico produce normalmente un <code>NameError</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #d7a8a8; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #fff4f4; border-bottom: 1px solid #d7a8a8; color: #8b2e2e; font-size: 13px; font-weight: 700;">Entrada con error [7]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">precio_entrada</span> = <span style="color: #b35c00;">100</span>
+<span style="color: #8250df;">print</span>(<span style="color: #b42318;">precio_entrda</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #fff4f4; border-top: 1px solid #d7a8a8; border-bottom: 1px solid #d7a8a8; color: #8b2e2e; font-size: 13px; font-weight: 700;">Salida [7]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fffafa; color: #b42318; font-size: 14px; line-height: 1.55;"><code>NameError: name 'precio_entrda' is not defined</code></pre>
+  </div>
+
+  <p>El mensaje indica que <code>precio_entrda</code> no existe. La solución es corregir el nombre:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #a9d3b1; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f0faf2; border-bottom: 1px solid #a9d3b1; color: #276738; font-size: 13px; font-weight: 700;">Entrada corregida [8]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_entrada</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f0faf2; border-top: 1px solid #a9d3b1; border-bottom: 1px solid #a9d3b1; color: #276738; font-size: 13px; font-weight: 700;">Salida [8]</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfefb; color: #263238; font-size: 14px; line-height: 1.55;"><code>100</code></pre>
+  </div>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li><code>print()</code> muestra información.</li>
+      <li>Python respeta el orden de las operaciones.</li>
+      <li><code>#</code> inicia un comentario.</li>
+      <li><code>=</code> asigna un valor a una variable.</li>
+      <li>Los nombres descriptivos hacen que los cálculos sean más fáciles de revisar.</li>
+      <li><code>NameError</code> suele indicar que una variable no existe o está mal escrita.</li>
+    </ul>
+  </div>
+
+  <h2>Tu turno</h2>
+  <p>Ahora tienes la oportunidad de probarlo. Realiza tu <a href="https://www.kaggle.com/kernels/fork/1275163" target="_blank" rel="noopener"><strong>primer ejercicio de programación en Python</strong></a>.</p>
+
+  <p style="margin-top: 24px; color: #6b7785; font-size: 12px; text-align: center;">Contenido original adaptado para un curso de Python aplicado al trading. Estructura didáctica inspirada en Kaggle Learn.</p>
+
+</div>
