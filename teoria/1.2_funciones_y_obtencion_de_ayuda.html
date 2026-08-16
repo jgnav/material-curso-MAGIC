@@ -1,0 +1,266 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.2. Funciones y obtención de ayuda</h2>
+    <p style="margin: 0; font-size: 17px;">En la lección anterior utilizaste funciones como <code>print()</code>, <code>round()</code> y <code>type()</code>. Ahora veremos con más detalle cómo se utilizan, cómo consultar su documentación y cómo crear funciones propias para reutilizar cálculos sin repetir código.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Funciones que ya conoces</h3>
+  <p>Una <strong>función</strong> es un bloque de código preparado para realizar una tarea concreta. Algunas funciones vienen incorporadas en Python; por eso podemos utilizarlas directamente sin definirlas antes.</p>
+  <p>Para llamar a una función escribimos su nombre seguido de paréntesis. Dentro de los paréntesis colocamos los valores con los que queremos que trabaje. Por ejemplo, <code>round(37.486, 2)</code> llama a <code>round()</code> con el número que queremos redondear y el número de decimales que queremos conservar.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">perdida</span> = -<span style="color: #b35c00;">37.486</span>
+<span style="color: #0550ae;">perdida_absoluta</span> = <span style="color: #8250df;">abs</span>(<span style="color: #0550ae;">perdida</span>)
+<span style="color: #0550ae;">perdida_redondeada</span> = <span style="color: #8250df;">round</span>(<span style="color: #0550ae;">perdida_absoluta</span>, <span style="color: #b35c00;">2</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">perdida_redondeada</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>37.49</code></pre>
+  </div>
+
+  <p>En este ejemplo, <code>abs()</code> devuelve el valor absoluto de la pérdida y <code>round()</code> redondea el resultado. Después guardamos cada resultado en una variable, igual que hacíamos con los cálculos aritméticos.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Función incorporada</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Tarea</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>print()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Muestra información.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>print("Resultado")</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>round()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Redondea un número.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>round(5.176, 2)</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>abs()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Calcula el valor absoluto.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>abs(-25)</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>min()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Devuelve el menor valor.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>min(48.60, 51.15)</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>max()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Devuelve el mayor valor.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>max(48.60, 51.15)</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>type()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Consulta el tipo de un valor.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>type(51.15)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Obtener ayuda con <code>help()</code></h3>
+  <p>Python incluye muchas funciones y no es necesario memorizar todos sus detalles. La función <code>help()</code> permite consultar cómo se utiliza otra función y es una de las herramientas más útiles cuando estamos aprendiendo.</p>
+  <p>Para consultar la ayuda de <code>round()</code>, escribimos el nombre de la función dentro de <code>help()</code>, pero sin llamarla:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">help</span>(<span style="color: #8250df;">round</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Parte del resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>round(number, ndigits=None)
+    Round a number to a given precision in decimal digits.</code></pre>
+  </div>
+
+  <p>La primera línea muestra la <strong>firma</strong> de la función: <code>round(number, ndigits=None)</code>. Nos indica que necesita un número y que admite un segundo valor llamado <code>ndigits</code>. El valor <code>None</code> señala que este segundo valor es opcional.</p>
+  <p>Debajo aparece una descripción breve. La documentación de Python y de muchas bibliotecas suele estar escrita en inglés, pero no hace falta entender cada palabra para obtener información útil: normalmente conviene localizar primero el nombre de la función, sus argumentos y una descripción general.</p>
+
+  <p>La ayuda también puede descubrirnos opciones que todavía no conocíamos. Por ejemplo, <code>help(print)</code> muestra un argumento opcional llamado <code>sep</code>, que permite elegir el texto que separa los valores mostrados:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #0a7b3e;">"BBVA"</span>, <span style="color: #0a7b3e;">"IBE"</span>, <span style="color: #0550ae;">sep</span>=<span style="color: #0a7b3e;">" | "</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN | BBVA | IBE</code></pre>
+  </div>
+
+  <p>Al escribir <code>sep=" | "</code> proporcionamos el argumento indicando su nombre. Más adelante utilizaremos esta misma forma de llamada con nuestras propias funciones.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #e5a000; background: #fff8e6; border-radius: 6px;">
+    <strong>Error habitual:</strong> escribe <code>help(round)</code>, no <code>help(round(37.486, 2))</code>. En el segundo caso, Python ejecuta primero <code>round()</code> y después muestra la ayuda del número que ha obtenido, no la ayuda de la función.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Definir una función propia</h3>
+  <p>Las funciones incorporadas resultan muy útiles, pero también podemos crear funciones adaptadas a nuestros cálculos. Imagina que aplicamos una comisión del 0,1 % a distintas operaciones. En lugar de escribir la misma fórmula cada vez, podemos definir una función:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_comision</span>(<span style="color: #0550ae;">importe</span>):
+    <span style="color: #0550ae;">comision</span> = <span style="color: #0550ae;">importe</span> * <span style="color: #b35c00;">0.001</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">comision</span></code></pre>
+  </div>
+
+  <p>Toda función tiene una <strong>cabecera</strong> y un <strong>cuerpo</strong>:</p>
+  <ul style="padding-left: 22px;">
+    <li>La cabecera empieza con <code>def</code>, incluye el nombre de la función y termina con dos puntos (<code>:</code>).</li>
+    <li><code>importe</code> es el parámetro que recibirá el valor de entrada.</li>
+    <li>Las líneas del cuerpo están sangradas cuatro espacios. Esta indentación indica que pertenecen a la función.</li>
+    <li><code>return</code> devuelve el resultado al lugar desde el que se llamó a la función.</li>
+  </ul>
+
+  <p>Al ejecutar esta definición, Python aprende qué debe hacer <code>calcular_comision()</code>, pero todavía no realiza ningún cálculo. Para ejecutar el cuerpo de la función tendremos que llamarla.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Llamar y reutilizar una función</h3>
+  <p>Llamar a una función significa ejecutarla. Al escribir <code>calcular_comision(5000)</code>, el valor <code>5000</code> ocupa temporalmente el lugar del parámetro <code>importe</code>. La función calcula la comisión y devuelve <code>5.0</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">comision_compra</span> = <span style="color: #8250df;">calcular_comision</span>(<span style="color: #b35c00;">5000</span>)
+<span style="color: #0550ae;">comision_venta</span> = <span style="color: #8250df;">calcular_comision</span>(<span style="color: #b35c00;">12500</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">comision_compra</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">comision_venta</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>5.0
+12.5</code></pre>
+  </div>
+
+  <p>La misma función sirve para tantos importes como necesitemos. Si más adelante cambia la fórmula, bastará con modificarla en la definición en lugar de buscar y corregir el cálculo en muchos lugares.</p>
+  <p>Este es uno de los principales motivos para utilizar funciones: reducen la repetición, hacen que el código sea más fácil de leer y disminuyen las oportunidades de introducir errores.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Parámetros y argumentos</h3>
+  <p>Los términos <strong>parámetro</strong> y <strong>argumento</strong> están relacionados, pero no significan exactamente lo mismo:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Término</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Significado</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Parámetro</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Nombre que aparece al definir la función.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>importe</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Argumento</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Valor concreto que proporcionamos al llamar a la función.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>5000</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Una función puede recibir varios parámetros. Se escriben dentro de los paréntesis y se separan con comas. En la llamada debemos proporcionar un argumento para cada parámetro y respetar el mismo orden.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_beneficio</span>(<span style="color: #0550ae;">precio_compra</span>, <span style="color: #0550ae;">precio_venta</span>, <span style="color: #0550ae;">cantidad</span>):
+    <span style="color: #0550ae;">coste</span> = <span style="color: #0550ae;">precio_compra</span> * <span style="color: #0550ae;">cantidad</span>
+    <span style="color: #0550ae;">ingreso</span> = <span style="color: #0550ae;">precio_venta</span> * <span style="color: #0550ae;">cantidad</span>
+    <span style="color: #0550ae;">beneficio</span> = <span style="color: #0550ae;">ingreso</span> - <span style="color: #0550ae;">coste</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">beneficio</span>
+
+<span style="color: #0550ae;">resultado</span> = <span style="color: #8250df;">calcular_beneficio</span>(<span style="color: #b35c00;">48.60</span>, <span style="color: #b35c00;">51.15</span>, <span style="color: #b35c00;">80</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">resultado</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>204.0</code></pre>
+  </div>
+
+  <p>En esta llamada, <code>48.60</code> se asigna a <code>precio_compra</code>, <code>51.15</code> a <code>precio_venta</code> y <code>80</code> a <code>cantidad</code>. Cuando la función termina, el valor devuelto se guarda en <code>resultado</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Devolver un resultado con <code>return</code></h3>
+  <p><code>return</code> envía un valor fuera de la función. Ese valor puede guardarse en una variable, mostrarse con <code>print()</code> o utilizarse en otro cálculo.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_valor_final</span>(<span style="color: #0550ae;">capital</span>, <span style="color: #0550ae;">rentabilidad_pct</span>):
+    <span style="color: #0550ae;">incremento</span> = <span style="color: #0550ae;">capital</span> * <span style="color: #0550ae;">rentabilidad_pct</span> / <span style="color: #b35c00;">100</span>
+    <span style="color: #0550ae;">valor_final</span> = <span style="color: #0550ae;">capital</span> + <span style="color: #0550ae;">incremento</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">valor_final</span>
+
+<span style="color: #0550ae;">capital_despues_operacion</span> = <span style="color: #8250df;">calcular_valor_final</span>(<span style="color: #b35c00;">10000</span>, <span style="color: #b35c00;">3.5</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">capital_despues_operacion</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>10350.0</code></pre>
+  </div>
+
+  <p>Las variables creadas dentro del cuerpo, como <code>incremento</code> y <code>valor_final</code>, son <strong>variables locales</strong>: solo existen dentro de esa función. Si necesitamos utilizar uno de sus valores fuera, debemos devolverlo con <code>return</code>.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    <strong><code>print()</code> y <code>return</code> no hacen lo mismo:</strong> <code>print()</code> muestra información en pantalla; <code>return</code> entrega un valor para que el resto del programa pueda reutilizarlo. Una función puede mostrar algo sin devolver ningún valor, pero entonces no podremos guardar su resultado. En ese caso, Python devuelve el valor especial <code>None</code>.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Parámetros opcionales</h3>
+  <p>Algunos parámetros pueden tener un valor predeterminado. Esto permite llamar a la función sin proporcionar siempre todos los argumentos. En el siguiente ejemplo, la comisión predeterminada es del 0,1 %:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_comision</span>(<span style="color: #0550ae;">importe</span>, <span style="color: #0550ae;">porcentaje</span>=<span style="color: #b35c00;">0.001</span>):
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">importe</span> * <span style="color: #0550ae;">porcentaje</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">calcular_comision</span>(<span style="color: #b35c00;">5000</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">calcular_comision</span>(<span style="color: #b35c00;">5000</span>, <span style="color: #b35c00;">0.002</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">calcular_comision</span>(<span style="color: #b35c00;">5000</span>, <span style="color: #0550ae;">porcentaje</span>=<span style="color: #b35c00;">0.0025</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>5.0
+10.0
+12.5</code></pre>
+  </div>
+
+  <p>En la primera llamada no indicamos <code>porcentaje</code>, así que Python utiliza <code>0.001</code>. En las dos llamadas siguientes sustituimos ese valor. La última utiliza un <strong>argumento con nombre</strong>, lo que deja claro qué parámetro estamos modificando.</p>
+  <p>Los parámetros obligatorios deben aparecer antes que los opcionales en la definición. En este caso, <code>importe</code> es obligatorio y <code>porcentaje</code> es opcional.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Documentar nuestras funciones</h3>
+  <p><code>help()</code> también puede utilizarse con las funciones que escribimos. Para que la ayuda explique su propósito, añadimos una <strong>docstring</strong>: un texto entre comillas triples colocado justo después de la cabecera.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_rentabilidad</span>(<span style="color: #0550ae;">precio_inicial</span>, <span style="color: #0550ae;">precio_final</span>):
+    <span style="color: #0a7b3e;">"""Calcula la rentabilidad porcentual entre dos precios."""</span>
+    <span style="color: #0550ae;">rentabilidad</span> = (<span style="color: #0550ae;">precio_final</span> / <span style="color: #0550ae;">precio_inicial</span> - <span style="color: #b35c00;">1</span>) * <span style="color: #b35c00;">100</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">rentabilidad</span>
+
+<span style="color: #8250df;">help</span>(<span style="color: #8250df;">calcular_rentabilidad</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Parte del resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>calcular_rentabilidad(precio_inicial, precio_final)
+    Calcula la rentabilidad porcentual entre dos precios.</code></pre>
+  </div>
+
+  <p>La firma indica qué argumentos necesita la función y la docstring explica qué hace. Escribir descripciones breves y claras facilita que otras personas —y nosotros mismos en el futuro— podamos reutilizar el código correctamente.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Ejemplo completo: beneficio neto de una operación</h3>
+  <p>Vamos a reunir lo aprendido en una función que calcula el beneficio neto de una compraventa. La función recibe los precios, la cantidad de acciones y una comisión por operación. Esta última tiene un valor predeterminado de 1,50 €.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">calcular_beneficio_neto</span>(<span style="color: #0550ae;">precio_compra</span>, <span style="color: #0550ae;">precio_venta</span>, <span style="color: #0550ae;">cantidad</span>, <span style="color: #0550ae;">comision</span>=<span style="color: #b35c00;">1.50</span>):
+    <span style="color: #0a7b3e;">"""Calcula el beneficio después de las comisiones de compra y venta."""</span>
+    <span style="color: #0550ae;">coste_total</span> = <span style="color: #0550ae;">precio_compra</span> * <span style="color: #0550ae;">cantidad</span> + <span style="color: #0550ae;">comision</span>
+    <span style="color: #0550ae;">ingreso_total</span> = <span style="color: #0550ae;">precio_venta</span> * <span style="color: #0550ae;">cantidad</span> - <span style="color: #0550ae;">comision</span>
+    <span style="color: #0550ae;">beneficio_neto</span> = <span style="color: #0550ae;">ingreso_total</span> - <span style="color: #0550ae;">coste_total</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">beneficio_neto</span>
+
+<span style="color: #0550ae;">operacion_1</span> = <span style="color: #8250df;">calcular_beneficio_neto</span>(<span style="color: #b35c00;">48.60</span>, <span style="color: #b35c00;">51.15</span>, <span style="color: #b35c00;">80</span>)
+<span style="color: #0550ae;">operacion_2</span> = <span style="color: #8250df;">calcular_beneficio_neto</span>(<span style="color: #b35c00;">25.40</span>, <span style="color: #b35c00;">26.10</span>, <span style="color: #b35c00;">100</span>, <span style="color: #0550ae;">comision</span>=<span style="color: #b35c00;">2.00</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Operación 1:"</span>, <span style="color: #8250df;">round</span>(<span style="color: #0550ae;">operacion_1</span>, <span style="color: #b35c00;">2</span>), <span style="color: #0a7b3e;">"€"</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Operación 2:"</span>, <span style="color: #8250df;">round</span>(<span style="color: #0550ae;">operacion_2</span>, <span style="color: #b35c00;">2</span>), <span style="color: #0a7b3e;">"€"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Operación 1: 201.0 €
+Operación 2: 66.0 €</code></pre>
+  </div>
+
+  <p>La primera llamada utiliza la comisión predeterminada. La segunda proporciona una comisión diferente mediante un argumento con nombre. En ambos casos reutilizamos la misma definición y guardamos el valor devuelto antes de mostrarlo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Depuración de errores en funciones</h3>
+  <p>Cuando una llamada no coincide con la definición de una función, Python suele mostrar un <code>TypeError</code>. Por ejemplo, <code>calcular_beneficio()</code> necesita tres argumentos, pero en esta llamada solo proporcionamos dos:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #d7a8a8; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #fff4f4; border-bottom: 1px solid #d7a8a8; color: #8b2e2e; font-size: 13px; font-weight: 700;">Código con error</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">calcular_beneficio</span>(<span style="color: #b35c00;">48.60</span>, <span style="color: #b35c00;">51.15</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #fff4f4; border-top: 1px solid #d7a8a8; border-bottom: 1px solid #d7a8a8; color: #8b2e2e; font-size: 13px; font-weight: 700;">Mensaje de error</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fffafa; color: #b42318; font-size: 14px; line-height: 1.55;"><code>TypeError: calcular_beneficio() missing 1 required positional argument: 'cantidad'</code></pre>
+  </div>
+
+  <p>La última parte del mensaje señala que falta <code>cantidad</code>. Podemos revisar la definición o ejecutar <code>help(calcular_beneficio)</code> para recordar qué argumentos necesita.</p>
+  <p>Al definir una función, otros errores frecuentes son olvidar los dos puntos al final de la cabecera o no indentar su cuerpo. En esos casos, Python muestra normalmente <code>SyntaxError</code> o <code>IndentationError</code>. Conviene revisar primero la línea indicada y comprobar la cabecera y sus espacios.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Una función agrupa código que realiza una tarea concreta.</li>
+      <li>Para llamar a una función escribimos su nombre seguido de paréntesis.</li>
+      <li><code>help()</code> muestra la firma y la documentación de una función.</li>
+      <li><code>def</code> inicia la definición y el cuerpo debe estar indentado.</li>
+      <li>Los parámetros aparecen en la definición; los argumentos son los valores utilizados en la llamada.</li>
+      <li><code>return</code> devuelve un valor para poder reutilizarlo fuera de la función.</li>
+      <li>Un parámetro con valor predeterminado es opcional.</li>
+      <li>Una docstring describe la función y aparece al consultar <code>help()</code>.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Funciones y obtención de ayuda</strong></a>.</p>
+
+</div>
