@@ -1,0 +1,277 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.3. Booleanos y estructuras condicionales</h2>
+    <p style="margin: 0; font-size: 17px;">En la lección anterior creaste funciones que realizaban siempre el mismo cálculo. Ahora aprenderás a hacer que el código tome decisiones: comparar valores, combinar condiciones y ejecutar instrucciones diferentes según los datos recibidos.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Los valores <code>True</code> y <code>False</code></h3>
+  <p>Un booleano, cuyo tipo en Python es <code>bool</code>, solo puede tener dos valores: <code>True</code> o <code>False</code>. Estos valores permiten representar respuestas a preguntas de sí o no, como si el mercado está abierto o si una orden se ha ejecutado.</p>
+  <p><code>True</code> y <code>False</code> se escriben con la primera letra en mayúscula y sin comillas. Si los escribimos entre comillas, Python los tratará como texto.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">mercado_abierto</span> = <span style="color: #cf222e;">True</span>
+<span style="color: #0550ae;">orden_ejecutada</span> = <span style="color: #cf222e;">False</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado_abierto</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">orden_ejecutada</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">mercado_abierto</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False
+&lt;class 'bool'&gt;</code></pre>
+  </div>
+
+  <p>Aunque podemos asignar estos valores directamente, lo más habitual es obtenerlos como resultado de una comparación.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Comparar valores</h3>
+  <p>Los operadores de comparación responden a preguntas como “¿es este precio mayor que el nivel?” o “¿son iguales estos dos valores?”. El resultado de cualquier comparación es siempre <code>True</code> o <code>False</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">precio_actual</span> = <span style="color: #b35c00;">105.20</span>
+<span style="color: #0550ae;">nivel</span> = <span style="color: #b35c00;">103.00</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_actual</span> &gt; <span style="color: #0550ae;">nivel</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_actual</span> == <span style="color: #0550ae;">nivel</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_actual</span> != <span style="color: #0550ae;">nivel</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False
+True</code></pre>
+  </div>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;">Operador</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Significado</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>==</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Igual a</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio == 100</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>!=</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Distinto de</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio != 100</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>&lt;</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Menor que</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio &lt; 100</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>&lt;=</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Menor o igual que</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio &lt;= 100</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>&gt;</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Mayor que</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio &gt; 100</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>&gt;=</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Mayor o igual que</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>precio &gt;= 100</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #e5a000; background: #fff8e6; border-radius: 6px;">
+    <strong>Importante:</strong> <code>=</code> asigna un valor a una variable, mientras que <code>==</code> compara dos valores. <code>precio = 100</code> cambia el valor de <code>precio</code>; <code>precio == 100</code> pregunta si su valor es <code>100</code>.
+  </div>
+
+  <p>Los tipos también influyen en una comparación. Python considera que el entero <code>100</code> y el decimal <code>100.0</code> representan el mismo valor numérico, pero el texto <code>"100"</code> es diferente:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #8250df;">print</span>(<span style="color: #b35c00;">100.0</span> == <span style="color: #b35c00;">100</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"100"</span> == <span style="color: #b35c00;">100</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Funciones que devuelven booleanos</h3>
+  <p>Una comparación puede aparecer directamente después de <code>return</code>. De esta forma creamos funciones que responden a una pregunta y devuelven <code>True</code> o <code>False</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #cf222e;">def</span> <span style="color: #8250df;">supera_nivel</span>(<span style="color: #0550ae;">precio</span>, <span style="color: #0550ae;">nivel</span>):
+    <span style="color: #0a7b3e;">"""Indica si un precio ha alcanzado o superado un nivel."""</span>
+    <span style="color: #cf222e;">return</span> <span style="color: #0550ae;">precio</span> &gt;= <span style="color: #0550ae;">nivel</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">supera_nivel</span>(<span style="color: #b35c00;">105.20</span>, <span style="color: #b35c00;">103.00</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">supera_nivel</span>(<span style="color: #b35c00;">101.50</span>, <span style="color: #b35c00;">103.00</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False</code></pre>
+  </div>
+
+  <p>No necesitamos escribir <code>return True</code> y <code>return False</code> por separado: la expresión <code>precio &gt;= nivel</code> ya produce uno de esos dos valores.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Combinar condiciones con <code>and</code>, <code>or</code> y <code>not</code></h3>
+  <p>A menudo una decisión depende de varias condiciones. Python permite combinarlas mediante tres operadores lógicos:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;">Operador</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Resultado</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>and</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Es <code>True</code> cuando todas las condiciones son verdaderas.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado_abierto and riesgo_aceptable</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>or</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Es <code>True</code> cuando al menos una condición es verdadera.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>senal_compra or senal_venta</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>not</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Invierte un booleano: <code>True</code> pasa a <code>False</code> y viceversa.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>not orden_bloqueada</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">mercado_abierto</span> = <span style="color: #cf222e;">True</span>
+<span style="color: #0550ae;">riesgo_aceptable</span> = <span style="color: #cf222e;">True</span>
+<span style="color: #0550ae;">orden_bloqueada</span> = <span style="color: #cf222e;">False</span>
+
+<span style="color: #0550ae;">puede_enviar_orden</span> = <span style="color: #0550ae;">mercado_abierto</span> <span style="color: #cf222e;">and</span> <span style="color: #0550ae;">riesgo_aceptable</span> <span style="color: #cf222e;">and not</span> <span style="color: #0550ae;">orden_bloqueada</span>
+<span style="color: #0550ae;">requiere_atencion</span> = (<span style="color: #cf222e;">not</span> <span style="color: #0550ae;">mercado_abierto</span>) <span style="color: #cf222e;">or</span> <span style="color: #0550ae;">orden_bloqueada</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">puede_enviar_orden</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">requiere_atencion</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False</code></pre>
+  </div>
+
+  <p>Cuando una expresión combina varios operadores, los paréntesis ayudan a dejar clara la intención. Python evalúa <code>and</code> antes que <code>or</code>, pero es más seguro escribir explícitamente cómo se agrupan las condiciones que depender de recordar ese orden.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">mercado_abierto</span> = <span style="color: #cf222e;">True</span>
+<span style="color: #0550ae;">senal_compra</span> = <span style="color: #cf222e;">True</span>
+<span style="color: #0550ae;">senal_venta</span> = <span style="color: #cf222e;">False</span>
+<span style="color: #0550ae;">riesgo_superado</span> = <span style="color: #cf222e;">False</span>
+
+<span style="color: #0550ae;">puede_operar</span> = (
+    <span style="color: #0550ae;">mercado_abierto</span>
+    <span style="color: #cf222e;">and</span> (<span style="color: #0550ae;">senal_compra</span> <span style="color: #cf222e;">or</span> <span style="color: #0550ae;">senal_venta</span>)
+    <span style="color: #cf222e;">and not</span> <span style="color: #0550ae;">riesgo_superado</span>
+)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">puede_operar</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Ejecutar código con <code>if</code></h3>
+  <p>Una estructura <code>if</code> ejecuta un bloque de código solamente cuando su condición es <code>True</code>. La línea termina con dos puntos y las instrucciones que dependen de la condición se escriben con cuatro espacios de indentación.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">precio_actual</span> = <span style="color: #b35c00;">105.20</span>
+<span style="color: #0550ae;">nivel</span> = <span style="color: #b35c00;">103.00</span>
+
+<span style="color: #cf222e;">if</span> <span style="color: #0550ae;">precio_actual</span> &gt; <span style="color: #0550ae;">nivel</span>:
+    <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"El precio ha superado el nivel"</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Comprobación finalizada"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>El precio ha superado el nivel
+Comprobación finalizada</code></pre>
+  </div>
+
+  <p>El primer mensaje pertenece al bloque del <code>if</code> y solo aparece porque la comparación es verdadera. El segundo no está indentado, así que se ejecuta siempre. Si <code>precio_actual &gt; nivel</code> fuese <code>False</code>, Python saltaría el bloque indentado y continuaría con la siguiente instrucción.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Elegir entre dos caminos con <code>if-else</code></h3>
+  <p><code>else</code> permite indicar qué debe ocurrir cuando la condición del <code>if</code> es falsa. De los dos bloques se ejecutará exactamente uno.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">beneficio</span> = -<span style="color: #b35c00;">32.50</span>
+
+<span style="color: #cf222e;">if</span> <span style="color: #0550ae;">beneficio</span> &gt; <span style="color: #b35c00;">0</span>:
+    <span style="color: #0550ae;">estado</span> = <span style="color: #0a7b3e;">"Operación con beneficio"</span>
+<span style="color: #cf222e;">else</span>:
+    <span style="color: #0550ae;">estado</span> = <span style="color: #0a7b3e;">"Operación sin beneficio"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">estado</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Operación sin beneficio</code></pre>
+  </div>
+
+  <p>Como <code>beneficio &gt; 0</code> es <code>False</code>, Python omite el primer bloque y ejecuta el bloque de <code>else</code>. <code>else</code> no lleva condición: representa todos los casos que no cumplieron la condición anterior.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Comprobar varias posibilidades con <code>if-elif-else</code></h3>
+  <p>Cuando necesitamos más de dos caminos, añadimos uno o varios bloques <code>elif</code>, abreviatura de <em>else if</em>. Python comprueba las condiciones de arriba abajo y ejecuta únicamente el primer bloque cuya condición sea <code>True</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">variacion_pct</span> = <span style="color: #b35c00;">0.40</span>
+
+<span style="color: #cf222e;">if</span> <span style="color: #0550ae;">variacion_pct</span> &gt;= <span style="color: #b35c00;">1</span>:
+    <span style="color: #0550ae;">senal</span> = <span style="color: #0a7b3e;">"Comprar"</span>
+<span style="color: #cf222e;">elif</span> <span style="color: #0550ae;">variacion_pct</span> &lt;= -<span style="color: #b35c00;">1</span>:
+    <span style="color: #0550ae;">senal</span> = <span style="color: #0a7b3e;">"Vender"</span>
+<span style="color: #cf222e;">else</span>:
+    <span style="color: #0550ae;">senal</span> = <span style="color: #0a7b3e;">"Mantener"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">senal</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Mantener</code></pre>
+  </div>
+
+  <p>La variación no alcanza el 1 % ni cae hasta el −1 %, por lo que las dos primeras condiciones son falsas y se ejecuta <code>else</code>. Tanto <code>elif</code> como <code>else</code> son opcionales, y podemos utilizar tantos bloques <code>elif</code> como necesitemos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Un <code>if-else</code> en una sola línea</h3>
+  <p>Cuando solo queremos elegir entre dos valores, podemos escribir una <strong>expresión condicional</strong> en una línea. Su estructura es <code>valor_si_verdadero if condicion else valor_si_falso</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">beneficio</span> = <span style="color: #b35c00;">125.40</span>
+<span style="color: #0550ae;">estado</span> = <span style="color: #0a7b3e;">"Con beneficio"</span> <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">beneficio</span> &gt; <span style="color: #b35c00;">0</span> <span style="color: #cf222e;">else</span> <span style="color: #0a7b3e;">"Sin beneficio"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">estado</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Con beneficio</code></pre>
+  </div>
+
+  <p>Python evalúa <code>beneficio &gt; 0</code>. Como la condición es verdadera, asigna <code>"Con beneficio"</code> a <code>estado</code>. Si fuese falsa, asignaría el valor situado después de <code>else</code>.</p>
+  <p>Esta forma resulta útil para decisiones breves. Si cada rama necesita varias instrucciones o la expresión se vuelve difícil de leer, es preferible utilizar un bloque <code>if-else</code> normal.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Ejemplo completo: comprobar límites básicos</h3>
+  <p>Podemos combinar comparaciones, operadores lógicos y varias ramas para comprobar si una operación cumple unos límites. En este ejemplo, el valor de la posición no puede superar el 25 % del capital y la pérdida máxima prevista no puede superar el 2 %.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python"><span style="color: #0550ae;">capital</span> = <span style="color: #b35c00;">10000</span>
+<span style="color: #0550ae;">valor_posicion</span> = <span style="color: #b35c00;">2000</span>
+<span style="color: #0550ae;">perdida_maxima</span> = <span style="color: #b35c00;">150</span>
+<span style="color: #0550ae;">mercado_abierto</span> = <span style="color: #cf222e;">True</span>
+
+<span style="color: #0550ae;">limite_posicion</span> = <span style="color: #0550ae;">capital</span> * <span style="color: #b35c00;">0.25</span>
+<span style="color: #0550ae;">limite_perdida</span> = <span style="color: #0550ae;">capital</span> * <span style="color: #b35c00;">0.02</span>
+
+<span style="color: #cf222e;">if not</span> <span style="color: #0550ae;">mercado_abierto</span>:
+    <span style="color: #0550ae;">resultado</span> = <span style="color: #0a7b3e;">"Mercado cerrado"</span>
+<span style="color: #cf222e;">elif</span> <span style="color: #0550ae;">valor_posicion</span> &gt; <span style="color: #0550ae;">limite_posicion</span>:
+    <span style="color: #0550ae;">resultado</span> = <span style="color: #0a7b3e;">"Posición demasiado grande"</span>
+<span style="color: #cf222e;">elif</span> <span style="color: #0550ae;">perdida_maxima</span> &gt; <span style="color: #0550ae;">limite_perdida</span>:
+    <span style="color: #0550ae;">resultado</span> = <span style="color: #0a7b3e;">"Riesgo demasiado alto"</span>
+<span style="color: #cf222e;">else</span>:
+    <span style="color: #0550ae;">resultado</span> = <span style="color: #0a7b3e;">"Operación permitida"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">resultado</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Operación permitida</code></pre>
+  </div>
+
+  <p>Python comprueba las condiciones de arriba abajo. Como el mercado está abierto y los dos límites se cumplen, llega al bloque <code>else</code>. Si cambiamos los valores iniciales y volvemos a ejecutar el código, el resultado puede proceder de otra rama.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Los booleanos solo pueden tener los valores <code>True</code> y <code>False</code>.</li>
+      <li>Los operadores <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> y <code>&gt;=</code> comparan valores.</li>
+      <li><code>and</code>, <code>or</code> y <code>not</code> permiten combinar o invertir condiciones.</li>
+      <li><code>if</code> ejecuta un bloque cuando su condición es verdadera.</li>
+      <li><code>else</code> cubre los casos que no cumplen las condiciones anteriores.</li>
+      <li><code>elif</code> permite comprobar varias posibilidades en orden.</li>
+      <li>Una expresión condicional permite elegir entre dos valores en una sola línea.</li>
+      <li>Los dos puntos y la indentación delimitan el código que pertenece a cada rama.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Booleanos y estructuras condicionales</strong></a>.</p>
+
+</div>
