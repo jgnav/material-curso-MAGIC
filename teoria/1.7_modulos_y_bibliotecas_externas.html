@@ -1,0 +1,284 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.7. Módulos y bibliotecas externas</h2>
+    <p style="margin: 0; font-size: 17px;">Hasta ahora hemos trabajado principalmente con funciones y tipos incorporados en Python. Sin embargo, una de sus mayores ventajas es la enorme cantidad de código reutilizable disponible en módulos y bibliotecas. En esta lección aprenderás a importarlos, explorar lo que ofrecen y reconocer los objetos nuevos que incorporan.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Módulos y bibliotecas</h3>
+  <p>Un <strong>módulo</strong> es un archivo de Python que agrupa funciones, variables y otros objetos relacionados. En lugar de volver a escribir ese código, podemos importarlo y utilizarlo en nuestro programa.</p>
+  <p>Una <strong>biblioteca</strong> es un conjunto más amplio de código preparado para resolver tareas de un determinado ámbito. Puede estar formada por varios módulos y submódulos. Por ejemplo, Matplotlib es una biblioteca de visualización y <code>matplotlib.pyplot</code> es uno de sus submódulos.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    Las funciones <code>print()</code>, <code>len()</code> o <code>round()</code> están incorporadas en Python y se pueden utilizar directamente. En cambio, para acceder al contenido de un módulo debemos importarlo primero.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Importar un módulo con <code>import</code></h3>
+  <p>Python incluye una <strong>biblioteca estándar</strong> disponible en cualquier instalación. Uno de sus módulos es <code>math</code>, que contiene funciones y constantes matemáticas. La instrucción <code>import math</code> carga el módulo y crea el nombre <code>math</code> en nuestro programa.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">math</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'module'&gt;</code></pre>
+  </div>
+
+  <p>La importación suele escribirse al principio del programa o del notebook. Solo necesitamos ejecutarla una vez durante la sesión para empezar a utilizar el contenido del módulo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Acceder a funciones y atributos</h3>
+  <p>Los nombres definidos dentro de un módulo se consultan mediante un punto. Algunos representan valores, como <code>math.pi</code>, y otros representan funciones, como <code>math.sqrt()</code> o <code>math.log()</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">math</span>.<span style="color: #0550ae;">pi</span>, <span style="color: #b35c00;">4</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">math</span>.<span style="color: #8250df;">sqrt</span>(<span style="color: #b35c00;">144</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">math</span>.<span style="color: #8250df;">log</span>(<span style="color: #b35c00;">8</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>3.1416
+12.0
+3.0</code></pre>
+  </div>
+
+  <p>El prefijo <code>math.</code> indica claramente de dónde procede cada nombre. Esta separación evita que las variables y funciones de distintos módulos se confundan entre sí.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Utilizar un alias con <code>as</code></h3>
+  <p>Podemos asignar un nombre más corto al módulo mediante <code>as</code>. El alias no modifica la biblioteca; solo establece el nombre que utilizaremos durante esa sesión.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">m</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">m</span>.<span style="color: #8250df;">sqrt</span>(<span style="color: #b35c00;">81</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">m</span>.<span style="color: #0550ae;">pi</span>, <span style="color: #b35c00;">3</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>9.0
+3.142</code></pre>
+  </div>
+
+  <p>Después de <code>import math as m</code>, accedemos al módulo mediante <code>m</code>. En las bibliotecas de análisis de datos existen alias aceptados por convención, como <code>np</code> para NumPy y <code>pd</code> para Pandas. Utilizarlos facilita que otras personas reconozcan el código.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Importar elementos concretos</h3>
+  <p>Si solo necesitamos unos pocos elementos, podemos importarlos directamente con <code>from modulo import elemento</code>. A partir de ese momento se utilizan sin escribir el nombre del módulo delante.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">from</span> <span style="color: #0550ae;">math</span> <span style="color: #cf222e;">import</span> <span style="color: #0550ae;">sqrt</span>, <span style="color: #0550ae;">pi</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">sqrt</span>(<span style="color: #b35c00;">25</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">pi</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>5.0
+3.14</code></pre>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #e5a000; background: #fff8e6; border-radius: 6px;">
+    <strong>Evita <code>from modulo import *</code>:</strong> esta forma importa todos los nombres sin indicar su procedencia. Si dos módulos contienen una función con el mismo nombre, la última importación puede sustituir a la anterior y producir resultados difíciles de interpretar. Es preferible importar el módulo completo o indicar los elementos concretos.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Biblioteca estándar y bibliotecas externas</h3>
+  <p>Los módulos de la biblioteca estándar se distribuyen con Python. Podemos utilizarlos sin instalar nada adicional. Las bibliotecas externas son proyectos independientes que deben estar instalados en el entorno antes de importarlos.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Procedencia</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplos</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Disponibilidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Biblioteca estándar</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>math</code>, <code>statistics</code>, <code>datetime</code>, <code>random</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Se instala junto con Python.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Bibliotecas externas</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">NumPy, Pandas, Matplotlib, Seaborn, scikit-learn</td><td style="padding: 10px; border: 1px solid #cbd5df;">Deben estar instaladas en el entorno.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Google Colab incluye de antemano muchas bibliotecas de análisis de datos. En otros entornos puede ser necesario instalarlas antes de ejecutar el <code>import</code>. La instalación y la importación son pasos diferentes: instalar hace que la biblioteca esté disponible; importar permite utilizarla en el programa actual.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Explorar con <code>type()</code>, <code>dir()</code> y <code>help()</code></h3>
+  <p>Cuando trabajamos con un módulo u objeto desconocido, tres funciones incorporadas nos ayudan a orientarnos:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Función</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Pregunta que responde</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>type(objeto)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué tipo de objeto es?</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>dir(objeto)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué nombres, atributos y métodos contiene?</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>help(objeto)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Cómo se utiliza y qué argumentos acepta?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">math</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">math</span>.<span style="color: #0550ae;">pi</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">callable</span>(<span style="color: #0550ae;">math</span>.<span style="color: #8250df;">sqrt</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"sqrt"</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">dir</span>(<span style="color: #0550ae;">math</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'module'&gt;
+&lt;class 'float'&gt;
+True
+True</code></pre>
+  </div>
+
+  <p><code>dir(math)</code> devuelve una lista larga, por lo que en el ejemplo comprobamos si contiene el nombre <code>"sqrt"</code>. Una vez localizada una función prometedora, podemos consultar su documentación:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span>
+
+<span style="color: #8250df;">help</span>(<span style="color: #0550ae;">math</span>.<span style="color: #8250df;">sqrt</span>)</code></pre>
+  </div>
+
+  <p>La ayuda muestra la firma de <code>sqrt()</code>, los argumentos que recibe y una descripción. El mismo proceso funciona con módulos completos, funciones, métodos y objetos creados por bibliotecas externas.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Objetos nativos y objetos de una biblioteca</h3>
+  <p>Las bibliotecas pueden definir sus propios tipos. Pandas proporciona objetos <code>Series</code> y <code>DataFrame</code>; Matplotlib, figuras y ejes; NumPy, arrays. Estos objetos pueden utilizar métodos y operadores de una forma distinta a los tipos nativos.</p>
+
+  <p>El siguiente ejemplo compara una lista de Python con un array de NumPy:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span>
+
+<span style="color: #0550ae;">precios_lista</span> = [<span style="color: #b35c00;">100</span>, <span style="color: #b35c00;">101</span>, <span style="color: #b35c00;">102</span>]
+<span style="color: #0550ae;">precios_array</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>(<span style="color: #0550ae;">precios_lista</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">precios_lista</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">precios_array</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_lista</span> + [<span style="color: #b35c00;">1</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_array</span> + <span style="color: #b35c00;">1</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'list'&gt;
+&lt;class 'numpy.ndarray'&gt;
+[100, 101, 102, 1]
+[101 102 103]</code></pre>
+  </div>
+
+  <p>En una lista, <code>+</code> une dos listas. En un array, <code>+ 1</code> suma uno a cada elemento. Es el mismo operador, pero cada tipo define su comportamiento. Por eso conviene utilizar <code>type()</code>, consultar la documentación y no asumir que un objeto externo funciona exactamente como una lista.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Bibliotecas que utilizaremos en el curso</h3>
+  <p>Las siguientes bibliotecas son habituales en análisis de datos y aparecerán en el próximo bloque del curso:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 720px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Biblioteca</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Uso principal</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Importación habitual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>NumPy</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Cálculo numérico y arrays.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>import numpy as np</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Pandas</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Carga, limpieza y análisis de datos tabulares.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>import pandas as pd</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Matplotlib</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Creación y personalización de gráficos.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>import matplotlib.pyplot as plt</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Seaborn</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Visualización estadística de alto nivel.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>import seaborn as sns</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>scikit-learn</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Preparación de datos y modelos de aprendizaje automático.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>from sklearn... import ...</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Las convenciones de alias forman parte del vocabulario habitual de Python. En scikit-learn se suelen importar clases o funciones concretas desde el submódulo correspondiente, en lugar de asignar un alias a toda la biblioteca.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Importaciones habituales</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">matplotlib.pyplot</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">plt</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">seaborn</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">sns</span>
+<span style="color: #cf222e;">from</span> <span style="color: #0550ae;">sklearn.linear_model</span> <span style="color: #cf222e;">import</span> <span style="color: #0550ae;">LinearRegression</span></code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Leer mensajes de error relacionados con importaciones</h3>
+  <p>Cuando una importación o una consulta falla, la última línea del mensaje suele contener el tipo de error y una descripción breve. Esa línea es el primer lugar que conviene leer.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 720px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Error</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Causa habitual</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Qué revisar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>ModuleNotFoundError</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">El módulo no está instalado o su nombre está mal escrito.</td><td style="padding: 10px; border: 1px solid #cbd5df;">El nombre de la biblioteca y el entorno utilizado.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>NameError</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Se utiliza un nombre que no existe en la sesión.</td><td style="padding: 10px; border: 1px solid #cbd5df;">Si se ejecutó el <code>import</code> y si se está usando el alias correcto.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>AttributeError</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">El módulo u objeto no contiene el atributo solicitado.</td><td style="padding: 10px; border: 1px solid #cbd5df;">La ortografía y el resultado de <code>dir()</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>TypeError</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una función recibe argumentos incompatibles.</td><td style="padding: 10px; border: 1px solid #cbd5df;">La firma mostrada por <code>help()</code> y los tipos de los argumentos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Por ejemplo, el módulo <code>math</code> no contiene una función llamada <code>raiz_cuadrada</code>:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">math</span>
+
+<span style="color: #0550ae;">math</span>.<span style="color: #8250df;">raiz_cuadrada</span>(<span style="color: #b35c00;">9</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #fff3f2; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #9b1c1c; font-size: 13px; font-weight: 700;">Mensaje de error</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fffafa; color: #8b1a1a; font-size: 14px; line-height: 1.55;"><code>AttributeError: module 'math' has no attribute 'raiz_cuadrada'</code></pre>
+  </div>
+
+  <p>El mensaje identifica el módulo y el nombre que no ha encontrado. Podemos consultar <code>dir(math)</code> o la documentación para localizar la función correcta, <code>math.sqrt()</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Ejemplo completo: utilizar un módulo desconocido</h3>
+  <p>Supongamos que queremos obtener la media y la mediana de una lista de precios. El módulo <code>statistics</code> de la biblioteca estándar ofrece funciones para estos cálculos. Podemos importarlo con un alias, comprobar qué contiene y utilizar sus funciones.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">statistics</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">stats</span>
+
+<span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"mean"</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">dir</span>(<span style="color: #0550ae;">stats</span>))
+
+<span style="color: #0550ae;">media</span> = <span style="color: #0550ae;">stats</span>.<span style="color: #8250df;">mean</span>(<span style="color: #0550ae;">precios_cierre</span>)
+<span style="color: #0550ae;">mediana</span> = <span style="color: #0550ae;">stats</span>.<span style="color: #8250df;">median</span>(<span style="color: #0550ae;">precios_cierre</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">f"Media: {</span><span style="color: #0550ae;">media</span><span style="color: #0a7b3e;">:.2f}"</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">f"Mediana: {</span><span style="color: #0550ae;">mediana</span><span style="color: #0a7b3e;">:.2f}"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+Media: 102.36
+Mediana: 102.45</code></pre>
+  </div>
+
+  <p>Este proceso se repite al descubrir una biblioteca nueva: importamos, comprobamos el tipo de los objetos, exploramos los nombres disponibles y consultamos la ayuda antes de utilizar las funciones elegidas.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Un módulo agrupa código reutilizable; una biblioteca puede reunir varios módulos y submódulos.</li>
+      <li><code>import modulo</code> carga un módulo y el punto permite acceder a su contenido.</li>
+      <li><code>as</code> asigna un alias, mientras que <code>from ... import ...</code> importa elementos concretos.</li>
+      <li>Las importaciones con <code>*</code> pueden provocar conflictos entre nombres.</li>
+      <li>La biblioteca estándar se incluye con Python; las bibliotecas externas deben estar instaladas.</li>
+      <li><code>type()</code>, <code>dir()</code> y <code>help()</code> ayudan a explorar módulos y objetos desconocidos.</li>
+      <li>Los tipos definidos por una biblioteca pueden dar un significado distinto a operadores y métodos.</li>
+      <li>Los alias habituales incluyen <code>np</code>, <code>pd</code>, <code>plt</code> y <code>sns</code>.</li>
+      <li>La última línea de un error suele indicar su tipo y la causa inmediata.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Módulos y bibliotecas externas</strong></a>.</p>
+
+</div>

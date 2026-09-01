@@ -1,0 +1,287 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.4. Listas</h2>
+    <p style="margin: 0; font-size: 17px;">Hasta ahora hemos guardado cada dato en una variable distinta. Sin embargo, cuando trabajamos con los precios de varias sesiones o con los valores de una cartera, resulta más práctico reunir los datos relacionados en una única colección. En esta lección aprenderás a crear listas, consultar y modificar sus elementos y realizar cálculos sencillos con ellas.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Crear una lista</h3>
+  <p>Una lista es una secuencia ordenada de valores. Se escribe entre corchetes, <code>[ ]</code>, y sus elementos se separan con comas. El orden importa: en una lista de precios, cada posición puede representar una sesión diferente.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+<span style="color: #0550ae;">tickers</span> = [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #0a7b3e;">"BBVA"</span>, <span style="color: #0a7b3e;">"IBE"</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">tickers</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">precios_cierre</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[101.2, 102.45, 100.8, 103.1, 104.25]
+['SAN', 'BBVA', 'IBE']
+&lt;class 'list'&gt;</code></pre>
+  </div>
+
+  <p>La primera lista contiene números decimales y la segunda contiene texto. Python también permite mezclar tipos de datos dentro de una misma lista, aunque normalmente una serie de precios o una lista de tickers resulta más fácil de interpretar si todos sus elementos representan la misma clase de información.</p>
+  <p>Una lista sin elementos se denomina <strong>lista vacía</strong> y se crea escribiendo simplemente <code>[]</code>. Más adelante podremos añadirle valores.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Conocer la longitud de una lista</h3>
+  <p>La función <code>len()</code> devuelve el número de elementos de una lista. En el siguiente ejemplo, ese número coincide con la cantidad de sesiones para las que hemos guardado un precio de cierre.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+<span style="color: #0550ae;">numero_sesiones</span> = <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">precios_cierre</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">numero_sesiones</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>5</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Acceder a los elementos mediante índices</h3>
+  <p>Cada elemento de una lista tiene asociada una posición, llamada <strong>índice</strong>. Python empieza a contar desde cero: el primer elemento tiene el índice <code>0</code>, el segundo el índice <code>1</code> y así sucesivamente. Para acceder a un elemento, escribimos el nombre de la lista seguido de su índice entre corchetes.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #b35c00;">0</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #b35c00;">2</span>])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>101.2
+100.8</code></pre>
+  </div>
+
+  <p>Como la lista tiene cinco elementos, sus índices positivos van de <code>0</code> a <code>4</code>. El último índice es siempre uno menos que la longitud de la lista.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Valor</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;"><code>101.20</code></th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;"><code>102.45</code></th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;"><code>100.80</code></th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;"><code>103.10</code></th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: center;"><code>104.25</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Índice positivo</strong></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>0</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>1</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>2</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>3</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>4</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Índice negativo</strong></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-5</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-4</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-3</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-2</code></td><td style="padding: 10px; border: 1px solid #cbd5df; text-align: center;"><code>-1</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>También podemos contar desde el final mediante índices negativos. El índice <code>-1</code> señala el último elemento, <code>-2</code> el penúltimo y así sucesivamente. Esta forma es especialmente útil cuando la longitud de la lista puede cambiar.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[-<span style="color: #b35c00;">1</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[-<span style="color: #b35c00;">2</span>])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>104.25
+103.1</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Seleccionar varios elementos con <em>slicing</em></h3>
+  <p>El <em>slicing</em> permite extraer una parte de una lista. Para indicar el comienzo y el final del corte utilizamos <code>lista[inicio:fin]</code>. El elemento situado en <code>inicio</code> se incluye, pero el elemento situado en <code>fin</code> queda fuera.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #b35c00;">0</span>:<span style="color: #b35c00;">3</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[:<span style="color: #b35c00;">3</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[-<span style="color: #b35c00;">2</span>:])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #b35c00;">2</span>:])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[101.2, 102.45, 100.8]
+[101.2, 102.45, 100.8]
+[103.1, 104.25]
+[100.8, 103.1, 104.25]</code></pre>
+  </div>
+
+  <p>Si omitimos el índice inicial, Python empieza desde el principio; si omitimos el índice final, continúa hasta el último elemento. Por eso <code>precios_cierre[:3]</code> selecciona los tres primeros precios y <code>precios_cierre[-2:]</code> selecciona los dos últimos.</p>
+  <p>Un <em>slice</em> produce una lista nueva con los elementos seleccionados. La lista original no cambia.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Modificar elementos</h3>
+  <p>Las listas son <strong>mutables</strong>: podemos cambiar sus elementos después de crearlas. La asignación se realiza utilizando el índice de la posición que queremos actualizar.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #b35c00;">2</span>] = <span style="color: #b35c00;">101.05</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[101.2, 102.45, 101.05, 103.1, 104.25]</code></pre>
+  </div>
+
+  <p>En este caso hemos corregido el tercer precio. La lista sigue teniendo cinco elementos; únicamente ha cambiado el valor que ocupaba el índice <code>2</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Añadir y eliminar elementos</h3>
+  <p>Las listas disponen de métodos para realizar operaciones habituales. Como vimos al trabajar con funciones, un método se llama escribiendo el nombre del objeto, un punto y el nombre del método. Por ejemplo, <code>tickers.append("ITX")</code> llama al método <code>append()</code> de la lista <code>tickers</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">tickers</span> = [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #0a7b3e;">"BBVA"</span>, <span style="color: #0a7b3e;">"IBE"</span>]
+
+<span style="color: #0550ae;">tickers</span>.<span style="color: #8250df;">append</span>(<span style="color: #0a7b3e;">"ITX"</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">tickers</span>)
+
+<span style="color: #0550ae;">tickers</span>.<span style="color: #8250df;">remove</span>(<span style="color: #0a7b3e;">"BBVA"</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">tickers</span>)
+
+<span style="color: #0550ae;">ultimo_ticker</span> = <span style="color: #0550ae;">tickers</span>.<span style="color: #8250df;">pop</span>()
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ultimo_ticker</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">tickers</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['SAN', 'BBVA', 'IBE', 'ITX']
+['SAN', 'IBE', 'ITX']
+ITX
+['SAN', 'IBE']</code></pre>
+  </div>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Método</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Qué hace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>lista.append(valor)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Añade <code>valor</code> al final de la lista.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>lista.remove(valor)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Elimina la primera aparición de <code>valor</code>.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>lista.pop()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Elimina el último elemento y lo devuelve.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>lista.index(valor)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Devuelve el índice de la primera aparición de <code>valor</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><code>append()</code> y <code>remove()</code> modifican la propia lista. <code>pop()</code> también la modifica, pero además devuelve el elemento eliminado, por lo que podemos guardarlo en una variable. Si necesitas recordar el funcionamiento de cualquiera de estos métodos, puedes consultar su documentación con una llamada como <code>help(tickers.append)</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Comprobar si un valor pertenece a una lista</h3>
+  <p>El operador <code>in</code> comprueba si un valor aparece en una lista y devuelve un booleano. El operador <code>not in</code> realiza la comprobación contraria. Podemos utilizar ambos resultados directamente o incorporarlos a las estructuras condicionales de la lección anterior.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">cartera</span> = [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #0a7b3e;">"IBE"</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"SAN"</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">cartera</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"BBVA"</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">cartera</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"ITX"</span> <span style="color: #cf222e;">not in</span> <span style="color: #0550ae;">cartera</span>)
+
+<span style="color: #cf222e;">if</span> <span style="color: #0a7b3e;">"SAN"</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">cartera</span>:
+    <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"SAN está en la cartera"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+False
+True
+SAN está en la cartera</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Cálculos básicos con listas numéricas</h3>
+  <p>Varias funciones incorporadas de Python permiten resumir una lista de números. <code>min()</code> devuelve el valor mínimo, <code>max()</code> el máximo y <code>sum()</code> suma todos los elementos. Combinando <code>sum()</code> y <code>len()</code> podemos calcular la media.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">min</span>(<span style="color: #0550ae;">precios_cierre</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">max</span>(<span style="color: #0550ae;">precios_cierre</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">precios_cierre</span>))
+
+<span style="color: #0550ae;">precio_medio</span> = <span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">precios_cierre</span>) / <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">precios_cierre</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_medio</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>100.8
+104.25
+511.8
+102.36</code></pre>
+  </div>
+
+  <p>La función <code>sorted()</code> devuelve los elementos ordenados en una lista nueva. De forma predeterminada, los números se ordenan de menor a mayor y el contenido de la lista original permanece sin cambios.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>, <span style="color: #b35c00;">103.10</span>, <span style="color: #b35c00;">104.25</span>]
+<span style="color: #0550ae;">precios_ordenados</span> = <span style="color: #8250df;">sorted</span>(<span style="color: #0550ae;">precios_cierre</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_ordenados</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_cierre</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[100.8, 101.2, 102.45, 103.1, 104.25]
+[101.2, 102.45, 100.8, 103.1, 104.25]</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Ejemplo completo: analizar las últimas sesiones</h3>
+  <p>Podemos combinar el <em>slicing</em> y las funciones anteriores para analizar solo una parte de los datos. En este ejemplo seleccionamos las tres sesiones más recientes y calculamos su precio mínimo, su precio máximo y su media.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">98.50</span>, <span style="color: #b35c00;">99.20</span>, <span style="color: #b35c00;">100.10</span>, <span style="color: #b35c00;">99.80</span>, <span style="color: #b35c00;">101.30</span>, <span style="color: #b35c00;">102.00</span>]
+
+<span style="color: #0550ae;">ultimas_tres</span> = <span style="color: #0550ae;">precios_cierre</span>[-<span style="color: #b35c00;">3</span>:]
+<span style="color: #0550ae;">precio_minimo</span> = <span style="color: #8250df;">min</span>(<span style="color: #0550ae;">ultimas_tres</span>)
+<span style="color: #0550ae;">precio_maximo</span> = <span style="color: #8250df;">max</span>(<span style="color: #0550ae;">ultimas_tres</span>)
+<span style="color: #0550ae;">precio_medio</span> = <span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">ultimas_tres</span>) / <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">ultimas_tres</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ultimas_tres</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_minimo</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precio_maximo</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">precio_medio</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[99.8, 101.3, 102.0]
+99.8
+102.0
+101.03</code></pre>
+  </div>
+
+  <p>El índice negativo evita que tengamos que conocer la longitud total de la lista para quedarnos con los tres últimos valores. Después, todas las funciones trabajan sobre <code>ultimas_tres</code>, no sobre la serie completa.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Introducción a las listas anidadas</h3>
+  <p>Una lista también puede contener otras listas. A esta estructura la llamamos <strong>lista anidada</strong>. Por ejemplo, podemos representar una cartera sencilla mediante una lista exterior en la que cada elemento es otra lista con el ticker, el número de acciones y el precio de compra de un activo.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">cartera</span> = [
+    [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #b35c00;">25</span>, <span style="color: #b35c00;">4.58</span>],
+    [<span style="color: #0a7b3e;">"IBE"</span>, <span style="color: #b35c00;">10</span>, <span style="color: #b35c00;">12.40</span>],
+    [<span style="color: #0a7b3e;">"ITX"</span>, <span style="color: #b35c00;">5</span>, <span style="color: #b35c00;">47.20</span>]
+]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">cartera</span>[<span style="color: #b35c00;">0</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">cartera</span>[<span style="color: #b35c00;">0</span>][<span style="color: #b35c00;">0</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">cartera</span>[<span style="color: #b35c00;">0</span>][<span style="color: #b35c00;">1</span>])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['SAN', 25, 4.58]
+SAN
+25</code></pre>
+  </div>
+
+  <p><code>cartera[0]</code> selecciona la primera lista interior completa. Para acceder a un dato concreto utilizamos dos índices: <code>cartera[0][0]</code> selecciona primero el primer activo y después su ticker, mientras que <code>cartera[0][1]</code> obtiene el número de acciones.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Las listas guardan una secuencia ordenada de valores y se escriben entre corchetes.</li>
+      <li><code>len()</code> devuelve el número de elementos de una lista.</li>
+      <li>Los índices positivos empiezan en <code>0</code> y los negativos permiten contar desde el final.</li>
+      <li>El <em>slicing</em> selecciona una parte de la lista sin modificar la original.</li>
+      <li>Las listas son mutables: podemos cambiar, añadir y eliminar elementos.</li>
+      <li><code>in</code> y <code>not in</code> comprueban si un valor pertenece a una lista.</li>
+      <li><code>min()</code>, <code>max()</code>, <code>sum()</code>, <code>len()</code> y <code>sorted()</code> permiten obtener información y realizar cálculos básicos.</li>
+      <li>Una lista puede contener otras listas para representar datos con varios niveles.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Listas</strong></a>.</p>
+
+</div>

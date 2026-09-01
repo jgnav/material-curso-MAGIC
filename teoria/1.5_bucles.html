@@ -1,0 +1,375 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.5. Bucles</h2>
+    <p style="margin: 0; font-size: 17px;">En la lección anterior aprendiste a reunir varios datos en una lista. Ahora veremos cómo recorrer esos datos y ejecutar las mismas instrucciones para cada elemento. Los bucles permiten trabajar con una lista completa sin tener que repetir el código para cada precio, cada sesión o cada activo.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Recorrer una lista con <code>for</code></h3>
+  <p>Un bucle <code>for</code> toma los elementos de una secuencia uno a uno. En el siguiente ejemplo, la variable <code>ticker</code> recibe en cada vuelta un elemento distinto de la lista <code>tickers</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">tickers</span> = [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #0a7b3e;">"IBE"</span>, <span style="color: #0a7b3e;">"ITX"</span>]
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">ticker</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">tickers</span>:
+    <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Recorrido terminado"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN
+IBE
+ITX
+Recorrido terminado</code></pre>
+  </div>
+
+  <p>La estructura del bucle contiene cuatro partes:</p>
+
+  <ul style="padding-left: 24px;">
+    <li><code>for</code> indica que comienza un bucle.</li>
+    <li><code>ticker</code> es la variable que utilizará cada elemento durante su vuelta.</li>
+    <li><code>in tickers</code> señala la secuencia que vamos a recorrer.</li>
+    <li>Los dos puntos y la indentación delimitan las instrucciones que se repiten.</li>
+  </ul>
+
+  <p>Python ejecuta la línea indentada tres veces: primero con <code>ticker</code> igual a <code>"SAN"</code>, después a <code>"IBE"</code> y finalmente a <code>"ITX"</code>. Cuando se agotan los elementos, continúa con la primera línea que ya no está indentada. Por eso el último mensaje solo aparece una vez.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Combinar un bucle con condiciones</h3>
+  <p>Dentro de un bucle podemos utilizar las estructuras condicionales que ya conocemos. De este modo, cada elemento puede recibir un tratamiento diferente según su valor.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variaciones_pct</span> = [<span style="color: #b35c00;">0.8</span>, -<span style="color: #b35c00;">0.4</span>, <span style="color: #b35c00;">0.0</span>, <span style="color: #b35c00;">1.2</span>]
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">variacion</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">variaciones_pct</span>:
+    <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">variacion</span> &gt; <span style="color: #b35c00;">0</span>:
+        <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variacion</span>, <span style="color: #0a7b3e;">"- Sesión positiva"</span>)
+    <span style="color: #cf222e;">elif</span> <span style="color: #0550ae;">variacion</span> &lt; <span style="color: #b35c00;">0</span>:
+        <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variacion</span>, <span style="color: #0a7b3e;">"- Sesión negativa"</span>)
+    <span style="color: #cf222e;">else</span>:
+        <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variacion</span>, <span style="color: #0a7b3e;">"- Sesión sin cambios"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0.8 - Sesión positiva
+-0.4 - Sesión negativa
+0.0 - Sesión sin cambios
+1.2 - Sesión positiva</code></pre>
+  </div>
+
+  <p>El bloque del <code>for</code> tiene cuatro espacios de indentación. Los bloques de <code>if</code>, <code>elif</code> y <code>else</code> están dentro del bucle, así que sus instrucciones necesitan un segundo nivel de indentación. Para cada variación se ejecuta solamente una de las tres ramas.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Repetir un número determinado de veces con <code>range()</code></h3>
+  <p>La función <code>range()</code> genera una secuencia de números enteros y se utiliza con frecuencia en los bucles. Al igual que ocurre con el <em>slicing</em>, el valor final no se incluye. Por tanto, <code>range(5)</code> produce los números desde <code>0</code> hasta <code>4</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">for</span> <span style="color: #0550ae;">numero</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">range</span>(<span style="color: #b35c00;">5</span>):
+    <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">numero</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0
+1
+2
+3
+4</code></pre>
+  </div>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Llamada</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Números generados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>range(5)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>0, 1, 2, 3, 4</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>range(2, 6)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>2, 3, 4, 5</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>range(2, 10, 2)</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>2, 4, 6, 8</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>La forma <code>range(inicio, fin, paso)</code> permite indicar dónde comienza la secuencia y cuánto avanza en cada vuelta. Si solo queremos recorrer los elementos de una lista, normalmente es más claro escribir <code>for elemento in lista</code>. <code>range()</code> resulta especialmente útil cuando necesitamos trabajar con posiciones.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Trabajar con posiciones consecutivas</h3>
+  <p>Para calcular la variación entre dos precios consecutivos necesitamos acceder al precio actual y al anterior. En este caso recorremos los índices desde <code>1</code>, porque el primer precio no tiene una sesión anterior con la que compararse.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">100.00</span>, <span style="color: #b35c00;">102.00</span>, <span style="color: #b35c00;">101.00</span>, <span style="color: #b35c00;">104.00</span>]
+<span style="color: #0550ae;">variaciones_pct</span> = []
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">indice</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">range</span>(<span style="color: #b35c00;">1</span>, <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">precios_cierre</span>)):
+    <span style="color: #0550ae;">precio_anterior</span> = <span style="color: #0550ae;">precios_cierre</span>[<span style="color: #0550ae;">indice</span> - <span style="color: #b35c00;">1</span>]
+    <span style="color: #0550ae;">precio_actual</span> = <span style="color: #0550ae;">precios_cierre</span>[<span style="color: #0550ae;">indice</span>]
+    <span style="color: #0550ae;">variacion</span> = (<span style="color: #0550ae;">precio_actual</span> / <span style="color: #0550ae;">precio_anterior</span> - <span style="color: #b35c00;">1</span>) * <span style="color: #b35c00;">100</span>
+    <span style="color: #0550ae;">variaciones_pct</span>.<span style="color: #8250df;">append</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">variacion</span>, <span style="color: #b35c00;">2</span>))
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variaciones_pct</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[2.0, -0.98, 2.97]</code></pre>
+  </div>
+
+  <p><code>range(1, len(precios_cierre))</code> genera los índices <code>1</code>, <code>2</code> y <code>3</code>. En cada vuelta, <code>indice</code> señala el precio actual e <code>indice - 1</code> señala el anterior. Cada resultado redondeado se añade a <code>variaciones_pct</code> mediante <code>append()</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Obtener la posición y el valor con <code>enumerate()</code></h3>
+  <p>En ocasiones necesitamos tanto el elemento como su posición. La función <code>enumerate()</code> nos entrega ambos valores en cada vuelta y evita tener que mantener un contador manual.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">100.80</span>]
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">numero_sesion</span>, <span style="color: #0550ae;">precio</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">enumerate</span>(<span style="color: #0550ae;">precios_cierre</span>, <span style="color: #0550ae;">start</span>=<span style="color: #b35c00;">1</span>):
+    <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Sesión"</span>, <span style="color: #0550ae;">numero_sesion</span>, <span style="color: #0a7b3e;">"-"</span>, <span style="color: #0550ae;">precio</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Sesión 1 - 101.2
+Sesión 2 - 102.45
+Sesión 3 - 100.8</code></pre>
+  </div>
+
+  <p>En cada vuelta, <code>numero_sesion</code> recibe la posición y <code>precio</code> recibe el elemento correspondiente. De forma predeterminada, <code>enumerate()</code> empieza a contar desde <code>0</code>; con el argumento <code>start=1</code> hacemos que la numeración mostrada comience en <code>1</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Acumuladores y contadores</h3>
+  <p>Un <strong>acumulador</strong> es una variable cuyo valor se actualiza en cada vuelta del bucle. Puede utilizarse para sumar cantidades, construir una lista o contar cuántos elementos cumplen una condición.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variaciones_pct</span> = [<span style="color: #b35c00;">0.8</span>, -<span style="color: #b35c00;">0.4</span>, <span style="color: #b35c00;">0.0</span>, <span style="color: #b35c00;">1.2</span>, -<span style="color: #b35c00;">0.7</span>]
+<span style="color: #0550ae;">sesiones_positivas</span> = <span style="color: #b35c00;">0</span>
+<span style="color: #0550ae;">sesiones_negativas</span> = <span style="color: #b35c00;">0</span>
+<span style="color: #0550ae;">sesiones_sin_cambios</span> = <span style="color: #b35c00;">0</span>
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">variacion</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">variaciones_pct</span>:
+    <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">variacion</span> &gt; <span style="color: #b35c00;">0</span>:
+        <span style="color: #0550ae;">sesiones_positivas</span> += <span style="color: #b35c00;">1</span>
+    <span style="color: #cf222e;">elif</span> <span style="color: #0550ae;">variacion</span> &lt; <span style="color: #b35c00;">0</span>:
+        <span style="color: #0550ae;">sesiones_negativas</span> += <span style="color: #b35c00;">1</span>
+    <span style="color: #cf222e;">else</span>:
+        <span style="color: #0550ae;">sesiones_sin_cambios</span> += <span style="color: #b35c00;">1</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">sesiones_positivas</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">sesiones_negativas</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">sesiones_sin_cambios</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>2
+2
+1</code></pre>
+  </div>
+
+  <p>Los contadores se inicializan antes del bucle. La expresión <code>sesiones_positivas += 1</code> es una forma abreviada de escribir <code>sesiones_positivas = sesiones_positivas + 1</code>. Cuando termina el recorrido, cada variable contiene el total acumulado en su categoría.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Repetir mientras se cumpla una condición con <code>while</code></h3>
+  <p>Un bucle <code>while</code> no recorre necesariamente una lista. Repite su bloque mientras una condición sea <code>True</code> y se detiene cuando pasa a ser <code>False</code>. Resulta útil cuando no sabemos de antemano cuántas repeticiones serán necesarias.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">capital</span> = <span style="color: #b35c00;">1000</span>
+<span style="color: #0550ae;">objetivo</span> = <span style="color: #b35c00;">1100</span>
+<span style="color: #0550ae;">rentabilidad_diaria</span> = <span style="color: #b35c00;">0.02</span>
+<span style="color: #0550ae;">dias</span> = <span style="color: #b35c00;">0</span>
+
+<span style="color: #cf222e;">while</span> <span style="color: #0550ae;">capital</span> &lt; <span style="color: #0550ae;">objetivo</span>:
+    <span style="color: #0550ae;">capital</span> = <span style="color: #0550ae;">capital</span> * (<span style="color: #b35c00;">1</span> + <span style="color: #0550ae;">rentabilidad_diaria</span>)
+    <span style="color: #0550ae;">dias</span> += <span style="color: #b35c00;">1</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">dias</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">capital</span>, <span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>5
+1104.08</code></pre>
+  </div>
+
+  <p>Al principio de cada vuelta, Python comprueba si <code>capital &lt; objetivo</code>. Dentro del bucle actualizamos el capital y aumentamos el número de días. Tras la quinta vuelta, el capital ya no es inferior al objetivo y la ejecución continúa fuera del bloque.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #e5a000; background: #fff8e6; border-radius: 6px;">
+    <strong>Importante:</strong> alguna variable incluida en la condición debe acercar el bucle a su final. Si <code>capital</code> no cambiase dentro del bloque, la condición seguiría siendo verdadera y el bucle se repetiría indefinidamente.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Controlar el recorrido con <code>continue</code> y <code>break</code></h3>
+  <p>Normalmente, un bucle ejecuta todas sus instrucciones en cada vuelta y continúa hasta agotar la secuencia o hasta que la condición de un <code>while</code> sea falsa. Las instrucciones <code>continue</code> y <code>break</code> permiten alterar ese recorrido.</p>
+
+  <h4 style="margin-top: 26px; color: #243447; font-size: 18px;">Saltar una vuelta con <code>continue</code></h4>
+  <p><code>continue</code> interrumpe la vuelta actual y pasa directamente al siguiente elemento. Las instrucciones situadas después de <code>continue</code> no se ejecutan en esa vuelta.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variaciones_pct</span> = [<span style="color: #b35c00;">0.8</span>, <span style="color: #b35c00;">0.0</span>, -<span style="color: #b35c00;">0.4</span>, <span style="color: #b35c00;">1.2</span>]
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">variacion</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">variaciones_pct</span>:
+    <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">variacion</span> == <span style="color: #b35c00;">0</span>:
+        <span style="color: #cf222e;">continue</span>
+    <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variacion</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Recorrido terminado"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0.8
+-0.4
+1.2
+Recorrido terminado</code></pre>
+  </div>
+
+  <p>Cuando <code>variacion</code> vale <code>0.0</code>, Python ejecuta <code>continue</code> y no llega al <code>print()</code> de esa vuelta. El bucle no termina: continúa con <code>-0.4</code> y después con <code>1.2</code>.</p>
+
+  <h4 style="margin-top: 26px; color: #243447; font-size: 18px;">Terminar el bucle con <code>break</code></h4>
+  <p><code>break</code> finaliza el bucle por completo, aunque todavía queden elementos por recorrer. La ejecución continúa en la primera instrucción situada después del bucle.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">101.20</span>, <span style="color: #b35c00;">102.45</span>, <span style="color: #b35c00;">97.80</span>, <span style="color: #b35c00;">103.10</span>]
+<span style="color: #0550ae;">nivel_alerta</span> = <span style="color: #b35c00;">100</span>
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">precio</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">precios_cierre</span>:
+    <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">precio</span> &lt; <span style="color: #0550ae;">nivel_alerta</span>:
+        <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Alerta:"</span>, <span style="color: #0550ae;">precio</span>)
+        <span style="color: #cf222e;">break</span>
+    <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Precio revisado:"</span>, <span style="color: #0550ae;">precio</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"Comprobación finalizada"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Precio revisado: 101.2
+Precio revisado: 102.45
+Alerta: 97.8
+Comprobación finalizada</code></pre>
+  </div>
+
+  <p>Al encontrar el primer precio inferior a <code>nivel_alerta</code>, el código muestra la alerta y ejecuta <code>break</code>. El precio <code>103.10</code> ya no se revisa. El último mensaje sí aparece porque está fuera del bucle.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Instrucción</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>continue</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Omite el resto de la vuelta actual y comienza la siguiente.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>break</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Termina el bucle y continúa con el código posterior.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Crear listas mediante comprensiones</h3>
+  <p>Es muy habitual recorrer una lista para transformar cada elemento y guardar los resultados en otra. Una <strong>comprensión de listas</strong> permite expresar ese patrón de forma compacta.</p>
+
+  <p>Primero veamos la versión con un bucle tradicional:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variaciones_decimales</span> = [<span style="color: #b35c00;">0.008</span>, -<span style="color: #b35c00;">0.004</span>, <span style="color: #b35c00;">0.012</span>]
+<span style="color: #0550ae;">variaciones_pct</span> = []
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">variacion</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">variaciones_decimales</span>:
+    <span style="color: #0550ae;">variaciones_pct</span>.<span style="color: #8250df;">append</span>(<span style="color: #0550ae;">variacion</span> * <span style="color: #b35c00;">100</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variaciones_pct</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[0.8, -0.4, 1.2]</code></pre>
+  </div>
+
+  <p>La misma transformación puede escribirse en una línea:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variaciones_decimales</span> = [<span style="color: #b35c00;">0.008</span>, -<span style="color: #b35c00;">0.004</span>, <span style="color: #b35c00;">0.012</span>]
+<span style="color: #0550ae;">variaciones_pct</span> = [<span style="color: #0550ae;">variacion</span> * <span style="color: #b35c00;">100</span> <span style="color: #cf222e;">for</span> <span style="color: #0550ae;">variacion</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">variaciones_decimales</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">variaciones_pct</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[0.8, -0.4, 1.2]</code></pre>
+  </div>
+
+  <p>La estructura general es <code>[expresion for elemento in secuencia]</code>. Python evalúa la expresión de la izquierda para cada elemento de la secuencia y reúne los resultados en una lista nueva. En este ejemplo, la expresión <code>variacion * 100</code> se aplica a cada valor de <code>variaciones_decimales</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Filtrar valores en una comprensión</h3>
+  <p>También podemos añadir una condición al final de la comprensión. Solo se incorporan a la nueva lista los elementos para los que esa condición es <code>True</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">activos</span> = [
+    [<span style="color: #0a7b3e;">"SAN"</span>, <span style="color: #b35c00;">1.4</span>],
+    [<span style="color: #0a7b3e;">"IBE"</span>, -<span style="color: #b35c00;">0.6</span>],
+    [<span style="color: #0a7b3e;">"ITX"</span>, <span style="color: #b35c00;">0.9</span>],
+    [<span style="color: #0a7b3e;">"REP"</span>, -<span style="color: #b35c00;">1.2</span>]
+]
+
+<span style="color: #0550ae;">activos_positivos</span> = [
+    <span style="color: #0550ae;">activo</span>[<span style="color: #b35c00;">0</span>]
+    <span style="color: #cf222e;">for</span> <span style="color: #0550ae;">activo</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">activos</span>
+    <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">activo</span>[<span style="color: #b35c00;">1</span>] &gt; <span style="color: #b35c00;">0</span>
+]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">activos_positivos</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['SAN', 'ITX']</code></pre>
+  </div>
+
+  <p>Cada <code>activo</code> es una de las listas interiores. La condición <code>activo[1] &gt; 0</code> conserva únicamente los activos con una variación positiva, mientras que la expresión <code>activo[0]</code> selecciona el ticker que se añadirá al resultado.</p>
+  <p>Las comprensiones suelen escribirse en una línea, pero dividir una expresión algo más larga como esta ayuda a distinguir sus tres partes: qué valor se guarda, qué secuencia se recorre y qué condición se aplica.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Bucle tradicional o comprensión de listas</h3>
+  <p>Las dos formas pueden producir el mismo resultado. La elección depende de cuál exprese con mayor claridad lo que queremos hacer.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Forma</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Cuándo suele resultar más clara</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Bucle tradicional</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Cuando necesitamos varias instrucciones, actualizar distintos acumuladores o tomar decisiones complejas.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Comprensión de listas</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Cuando queremos crear una lista mediante una transformación o un filtro sencillo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Escribir menos líneas puede ser conveniente, pero no debe dificultar la lectura. Si una comprensión necesita varias condiciones o una expresión difícil de interpretar, un bucle tradicional será normalmente una opción mejor.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">12. Ejemplo completo: calcular y filtrar retornos</h3>
+  <p>En este último ejemplo reunimos varias ideas de la lección. Primero recorremos posiciones consecutivas para calcular los retornos de una serie de precios. Después utilizamos comprensiones para separar los retornos positivos y negativos.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios_cierre</span> = [<span style="color: #b35c00;">100.00</span>, <span style="color: #b35c00;">102.00</span>, <span style="color: #b35c00;">101.00</span>, <span style="color: #b35c00;">104.00</span>, <span style="color: #b35c00;">103.00</span>]
+<span style="color: #0550ae;">retornos_pct</span> = []
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">indice</span> <span style="color: #cf222e;">in</span> <span style="color: #8250df;">range</span>(<span style="color: #b35c00;">1</span>, <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">precios_cierre</span>)):
+    <span style="color: #0550ae;">retorno</span> = (<span style="color: #0550ae;">precios_cierre</span>[<span style="color: #0550ae;">indice</span>] / <span style="color: #0550ae;">precios_cierre</span>[<span style="color: #0550ae;">indice</span> - <span style="color: #b35c00;">1</span>] - <span style="color: #b35c00;">1</span>) * <span style="color: #b35c00;">100</span>
+    <span style="color: #0550ae;">retornos_pct</span>.<span style="color: #8250df;">append</span>(<span style="color: #8250df;">round</span>(<span style="color: #0550ae;">retorno</span>, <span style="color: #b35c00;">2</span>))
+
+<span style="color: #0550ae;">retornos_positivos</span> = [<span style="color: #0550ae;">retorno</span> <span style="color: #cf222e;">for</span> <span style="color: #0550ae;">retorno</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">retornos_pct</span> <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">retorno</span> &gt; <span style="color: #b35c00;">0</span>]
+<span style="color: #0550ae;">retornos_negativos</span> = [<span style="color: #0550ae;">retorno</span> <span style="color: #cf222e;">for</span> <span style="color: #0550ae;">retorno</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">retornos_pct</span> <span style="color: #cf222e;">if</span> <span style="color: #0550ae;">retorno</span> &lt; <span style="color: #b35c00;">0</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_pct</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_positivos</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_negativos</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[2.0, -0.98, 2.97, -0.96]
+[2.0, 2.97]
+[-0.98, -0.96]</code></pre>
+  </div>
+
+  <p>El bucle tradicional resulta apropiado para el cálculo porque necesita utilizar dos posiciones y varias operaciones. Una vez creada la lista de retornos, las dos comprensiones expresan de forma directa los filtros que queremos aplicar.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Un bucle <code>for</code> recorre los elementos de una secuencia uno a uno.</li>
+      <li>Podemos combinar un bucle con condiciones y utilizar varios niveles de indentación.</li>
+      <li><code>range()</code> genera secuencias de enteros y permite recorrer posiciones.</li>
+      <li><code>enumerate()</code> proporciona al mismo tiempo la posición y el valor.</li>
+      <li>Los acumuladores se actualizan en cada vuelta para sumar valores, construir listas o contar casos.</li>
+      <li>Un bucle <code>while</code> se repite mientras su condición sea verdadera.</li>
+      <li><code>continue</code> salta el resto de una vuelta y <code>break</code> termina el bucle.</li>
+      <li>Las comprensiones crean listas nuevas mediante transformaciones y filtros sencillos.</li>
+      <li>Cuando una comprensión dificulta la lectura, es preferible utilizar un bucle tradicional.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Bucles</strong></a>.</p>
+
+</div>

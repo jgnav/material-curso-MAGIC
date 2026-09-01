@@ -1,0 +1,319 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">1.6. Strings y diccionarios</h2>
+    <p style="margin: 0; font-size: 17px;">Ya sabemos organizar datos en listas y recorrerlos mediante bucles. En esta lección trabajaremos con dos tipos fundamentales de Python: los <em>strings</em>, que permiten almacenar y transformar texto, y los diccionarios, que relacionan cada dato con una clave descriptiva.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Crear strings</h3>
+  <p>Un <em>string</em>, o cadena de texto, es un valor de tipo <code>str</code>. Se puede escribir entre comillas dobles o simples; ambas formas son equivalentes. Elegir una u otra resulta útil cuando el propio texto contiene comillas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">ticker</span> = <span style="color: #0a7b3e;">"SAN"</span>
+<span style="color: #0550ae;">estado</span> = <span style="color: #0a7b3e;">'Orden ejecutada'</span>
+<span style="color: #0550ae;">mensaje</span> = <span style="color: #0a7b3e;">"El ticker 'SAN' está disponible"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">estado</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mensaje</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">ticker</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN
+Orden ejecutada
+El ticker 'SAN' está disponible
+&lt;class 'str'&gt;</code></pre>
+  </div>
+
+  <p>La secuencia <code>\n</code> representa un salto de línea dentro de un string. También podemos utilizar comillas triples para escribir textos de varias líneas, como ya hicimos en las <em>docstrings</em> de nuestras funciones.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">informe</span> = <span style="color: #0a7b3e;">"Ticker: SAN\nPrecio: 4.58"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">informe</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Ticker: SAN
+Precio: 4.58</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Los strings también son secuencias</h3>
+  <p>Un string es una secuencia de caracteres. Por eso admite varias operaciones que ya conocemos de las listas: índices positivos y negativos, <em>slicing</em>, <code>len()</code> y recorridos con <code>for</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">codigo</span> = <span style="color: #0a7b3e;">"SAN.MC"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>[<span style="color: #b35c00;">0</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>[:<span style="color: #b35c00;">3</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>[-<span style="color: #b35c00;">2</span>:])
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">len</span>(<span style="color: #0550ae;">codigo</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>S
+SAN
+MC
+6</code></pre>
+  </div>
+
+  <p>El índice <code>0</code> devuelve el primer carácter, <code>[:3]</code> selecciona los tres primeros y <code>[-2:]</code> los dos últimos. El punto también es un carácter, de modo que <code>len("SAN.MC")</code> devuelve <code>6</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">ticker</span> = <span style="color: #0a7b3e;">"SAN"</span>
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">caracter</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">ticker</span>:
+    <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">caracter</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>S
+A
+N</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Los strings son inmutables</h3>
+  <p>A diferencia de las listas, los strings son <strong>inmutables</strong>: no podemos sustituir directamente uno de sus caracteres ni añadir otro mediante <code>append()</code>. Los métodos de texto crean y devuelven un string nuevo; el original no cambia.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">codigo</span> = <span style="color: #0a7b3e;">"SAN.MC"</span>
+<span style="color: #0550ae;">ticker</span> = <span style="color: #0550ae;">codigo</span>.<span style="color: #8250df;">replace</span>(<span style="color: #0a7b3e;">".MC"</span>, <span style="color: #0a7b3e;">""</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN.MC
+SAN</code></pre>
+  </div>
+
+  <p><code>replace()</code> devuelve el texto sin <code>".MC"</code>, que guardamos en una variable distinta. Al mostrar <code>codigo</code>, comprobamos que conserva su valor inicial.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Limpiar y normalizar texto</h3>
+  <p>Los datos de texto pueden contener espacios innecesarios o utilizar mayúsculas y minúsculas de forma irregular. Los métodos <code>strip()</code>, <code>upper()</code> y <code>lower()</code> permiten normalizarlos.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">ticker_usuario</span> = <span style="color: #0a7b3e;">"  san.mc  "</span>
+<span style="color: #0550ae;">texto_estado</span> = <span style="color: #0a7b3e;">"  MERCADO ABIERTO  "</span>
+
+<span style="color: #0550ae;">ticker_limpio</span> = <span style="color: #0550ae;">ticker_usuario</span>.<span style="color: #8250df;">strip</span>().<span style="color: #8250df;">upper</span>()
+<span style="color: #0550ae;">estado_normalizado</span> = <span style="color: #0550ae;">texto_estado</span>.<span style="color: #8250df;">strip</span>().<span style="color: #8250df;">lower</span>()
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker_limpio</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">estado_normalizado</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN.MC
+mercado abierto</code></pre>
+  </div>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Método</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Qué devuelve</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>texto.strip()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">El texto sin espacios al principio ni al final.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>texto.upper()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una copia convertida a mayúsculas.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>texto.lower()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una copia convertida a minúsculas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Podemos encadenar métodos porque cada uno devuelve un nuevo string. Python evalúa la expresión de izquierda a derecha: primero elimina los espacios y después cambia las letras.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Buscar y sustituir dentro de un string</h3>
+  <p>Otros métodos permiten comprobar cómo empieza o termina un texto y sustituir una parte por otra. <code>startswith()</code> y <code>endswith()</code> devuelven booleanos, por lo que pueden utilizarse directamente en una condición.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">codigo</span> = <span style="color: #0a7b3e;">"SAN.MC"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>.<span style="color: #8250df;">startswith</span>(<span style="color: #0a7b3e;">"SAN"</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>.<span style="color: #8250df;">endswith</span>(<span style="color: #0a7b3e;">".MC"</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">codigo</span>.<span style="color: #8250df;">replace</span>(<span style="color: #0a7b3e;">".MC"</span>, <span style="color: #0a7b3e;">""</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>True
+True
+SAN</code></pre>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Pasar de strings a listas con <code>split()</code> y <code>join()</code></h3>
+  <p><code>split()</code> divide un string y devuelve una lista de fragmentos. Si no indicamos ningún argumento, separa por espacios; también podemos especificar otro separador, como una coma.</p>
+  <p><code>join()</code> realiza la operación contraria: une una lista de strings y coloca entre ellos el separador sobre el que llamamos al método.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">registro</span> = <span style="color: #0a7b3e;">"SAN,4.58,25"</span>
+<span style="color: #0550ae;">campos</span> = <span style="color: #0550ae;">registro</span>.<span style="color: #8250df;">split</span>(<span style="color: #0a7b3e;">","</span>)
+<span style="color: #0550ae;">resumen</span> = <span style="color: #0a7b3e;">" | "</span>.<span style="color: #8250df;">join</span>(<span style="color: #0550ae;">campos</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">campos</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">resumen</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['SAN', '4.58', '25']
+SAN | 4.58 | 25</code></pre>
+  </div>
+
+  <p>Los tres elementos de <code>campos</code> siguen siendo strings, aunque algunos contengan dígitos. Si necesitásemos realizar cálculos con ellos, tendríamos que convertirlos al tipo numérico correspondiente con <code>int()</code> o <code>float()</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Construir mensajes con f-strings</h3>
+  <p>Las <strong>f-strings</strong> permiten insertar variables y expresiones dentro de un texto. Se escribe la letra <code>f</code> antes de las comillas y se colocan entre llaves los valores que queremos incorporar.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">ticker</span> = <span style="color: #0a7b3e;">"SAN"</span>
+<span style="color: #0550ae;">precio</span> = <span style="color: #b35c00;">4.58</span>
+<span style="color: #0550ae;">retorno</span> = <span style="color: #b35c00;">0.0137</span>
+
+<span style="color: #0550ae;">mensaje</span> = <span style="color: #0a7b3e;">f"{</span><span style="color: #0550ae;">ticker</span><span style="color: #0a7b3e;">}: {</span><span style="color: #0550ae;">precio</span><span style="color: #0a7b3e;">:.2f} € | retorno: {</span><span style="color: #0550ae;">retorno</span><span style="color: #0a7b3e;">:.2%}"</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mensaje</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>SAN: 4.58 € | retorno: 1.37%</code></pre>
+  </div>
+
+  <p><code>{ticker}</code> inserta el texto sin cambios. El formato <code>:.2f</code> muestra un número decimal con dos cifras y <code>:.2%</code> convierte el valor decimal a porcentaje y también utiliza dos cifras decimales. Las f-strings se ocupan de convertir los valores a texto al construir el mensaje.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Crear un diccionario</h3>
+  <p>Un diccionario relaciona <strong>claves</strong> con <strong>valores</strong>. Se escribe entre llaves, <code>{ }</code>; cada pareja utiliza dos puntos para separar su clave de su valor, y las parejas se separan mediante comas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios</span> = {
+    <span style="color: #0a7b3e;">"SAN"</span>: <span style="color: #b35c00;">4.58</span>,
+    <span style="color: #0a7b3e;">"IBE"</span>: <span style="color: #b35c00;">12.40</span>,
+    <span style="color: #0a7b3e;">"ITX"</span>: <span style="color: #b35c00;">47.20</span>
+}
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">precios</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>{'SAN': 4.58, 'IBE': 12.4, 'ITX': 47.2}
+&lt;class 'dict'&gt;</code></pre>
+  </div>
+
+  <p>En este diccionario, los tickers son las claves y los precios son sus valores. Cada clave debe ser única: no tendría sentido mantener dos valores distintos asociados simultáneamente a la misma clave. Los valores, en cambio, pueden repetirse y pueden ser de cualquier tipo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Acceder a los valores mediante claves</h3>
+  <p>Para recuperar un valor escribimos la clave entre corchetes. Los diccionarios no se consultan mediante posiciones numéricas como las listas, sino mediante las claves que hemos definido.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios</span> = {<span style="color: #0a7b3e;">"SAN"</span>: <span style="color: #b35c00;">4.58</span>, <span style="color: #0a7b3e;">"IBE"</span>: <span style="color: #b35c00;">12.40</span>, <span style="color: #0a7b3e;">"ITX"</span>: <span style="color: #b35c00;">47.20</span>}
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>[<span style="color: #0a7b3e;">"SAN"</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">"IBE"</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">precios</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #8250df;">get</span>(<span style="color: #0a7b3e;">"BBVA"</span>, <span style="color: #0a7b3e;">"No disponible"</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>4.58
+True
+No disponible</code></pre>
+  </div>
+
+  <p>El operador <code>in</code> comprueba si una clave existe en el diccionario. El método <code>get()</code> también busca una clave, pero permite indicar un valor alternativo para cuando no esté presente. En el ejemplo evita que la consulta de <code>"BBVA"</code> interrumpa el programa y devuelve <code>"No disponible"</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Añadir y modificar elementos</h3>
+  <p>La misma sintaxis de corchetes sirve para añadir una pareja nueva o actualizar el valor de una clave existente. Los diccionarios, al igual que las listas, son mutables.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios</span> = {<span style="color: #0a7b3e;">"SAN"</span>: <span style="color: #b35c00;">4.58</span>, <span style="color: #0a7b3e;">"IBE"</span>: <span style="color: #b35c00;">12.40</span>}
+
+<span style="color: #0550ae;">precios</span>[<span style="color: #0a7b3e;">"SAN"</span>] = <span style="color: #b35c00;">4.62</span>
+<span style="color: #0550ae;">precios</span>[<span style="color: #0a7b3e;">"REP"</span>] = <span style="color: #b35c00;">13.85</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>{'SAN': 4.62, 'IBE': 12.4, 'REP': 13.85}</code></pre>
+  </div>
+
+  <p>Como <code>"SAN"</code> ya era una clave, su precio se actualiza. <code>"REP"</code> no existía, por lo que se incorpora como una nueva pareja.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Claves, valores y parejas</h3>
+  <p>Los métodos <code>keys()</code>, <code>values()</code> e <code>items()</code> permiten acceder a las distintas partes de un diccionario.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Método</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Contenido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>diccionario.keys()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Todas las claves.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>diccionario.values()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Todos los valores.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>diccionario.items()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Todas las parejas de clave y valor.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">precios</span> = {<span style="color: #0a7b3e;">"SAN"</span>: <span style="color: #b35c00;">4.58</span>, <span style="color: #0a7b3e;">"IBE"</span>: <span style="color: #b35c00;">12.40</span>, <span style="color: #0a7b3e;">"ITX"</span>: <span style="color: #b35c00;">47.20</span>}
+
+<span style="color: #0550ae;">tickers</span> = <span style="color: #8250df;">list</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #8250df;">keys</span>())
+<span style="color: #0550ae;">valores</span> = <span style="color: #8250df;">list</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #8250df;">values</span>())
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">tickers</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">valores</span>)
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">ticker</span>, <span style="color: #0550ae;">precio</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">precios</span>.<span style="color: #8250df;">items</span>():
+    <span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ticker</span>, <span style="color: #0a7b3e;">"-&gt;"</span>, <span style="color: #0550ae;">precio</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['SAN', 'IBE', 'ITX']
+[4.58, 12.4, 47.2]
+SAN -&gt; 4.58
+IBE -&gt; 12.4
+ITX -&gt; 47.2</code></pre>
+  </div>
+
+  <p><code>keys()</code> y <code>values()</code> devuelven vistas del diccionario; en el ejemplo las convertimos con <code>list()</code> para mostrarlas como listas conocidas. <code>items()</code> resulta especialmente útil en un bucle, ya que permite recibir la clave y su valor en dos variables.</p>
+  <p>Si escribimos simplemente <code>for ticker in precios</code>, Python también recorre las claves. Utilizar <code>items()</code> deja más claro que necesitamos trabajar con las dos partes.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">12. Ejemplo completo: representar una cartera</h3>
+  <p>Los valores de un diccionario pueden ser otros diccionarios. Esta estructura permite agrupar varios datos de cada activo bajo una clave principal: el ticker.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">cartera</span> = {
+    <span style="color: #0a7b3e;">"SAN"</span>: {<span style="color: #0a7b3e;">"cantidad"</span>: <span style="color: #b35c00;">25</span>, <span style="color: #0a7b3e;">"precio_compra"</span>: <span style="color: #b35c00;">4.58</span>},
+    <span style="color: #0a7b3e;">"IBE"</span>: {<span style="color: #0a7b3e;">"cantidad"</span>: <span style="color: #b35c00;">10</span>, <span style="color: #0a7b3e;">"precio_compra"</span>: <span style="color: #b35c00;">12.40</span>}
+}
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">cartera</span>[<span style="color: #0a7b3e;">"SAN"</span>][<span style="color: #0a7b3e;">"cantidad"</span>])
+
+<span style="color: #cf222e;">for</span> <span style="color: #0550ae;">ticker</span>, <span style="color: #0550ae;">datos</span> <span style="color: #cf222e;">in</span> <span style="color: #0550ae;">cartera</span>.<span style="color: #8250df;">items</span>():
+    <span style="color: #0550ae;">valor</span> = <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"cantidad"</span>] * <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"precio_compra"</span>]
+    <span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">f"{</span><span style="color: #0550ae;">ticker</span><span style="color: #0a7b3e;">}: {</span><span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">'cantidad'</span>]<span style="color: #0a7b3e;">} acciones, valor {</span><span style="color: #0550ae;">valor</span><span style="color: #0a7b3e;">:.2f} €"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>25
+SAN: 25 acciones, valor 114.50 €
+IBE: 10 acciones, valor 124.00 €</code></pre>
+  </div>
+
+  <p><code>cartera["SAN"]</code> selecciona el diccionario interior del activo y el segundo par de corchetes elige uno de sus datos. En el bucle recorremos cada ticker junto con su diccionario, calculamos el valor de la posición y construimos un mensaje mediante una f-string.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Los strings son secuencias de caracteres y su tipo en Python es <code>str</code>.</li>
+      <li>Podemos utilizar índices, <em>slicing</em>, <code>len()</code> y bucles sobre un string.</li>
+      <li>Los strings son inmutables: sus métodos devuelven textos nuevos.</li>
+      <li><code>strip()</code>, <code>upper()</code>, <code>lower()</code> y <code>replace()</code> permiten limpiar y transformar texto.</li>
+      <li><code>split()</code> divide un string en una lista y <code>join()</code> une una lista de strings.</li>
+      <li>Las f-strings insertan y formatean valores dentro de un mensaje.</li>
+      <li>Los diccionarios relacionan claves únicas con valores.</li>
+      <li>Podemos consultar, añadir y modificar valores mediante sus claves.</li>
+      <li><code>keys()</code>, <code>values()</code> e <code>items()</code> permiten recorrer las partes de un diccionario.</li>
+      <li>Los diccionarios pueden contener otros diccionarios para representar datos con varios niveles.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Strings y diccionarios</strong></a>.</p>
+
+</div>

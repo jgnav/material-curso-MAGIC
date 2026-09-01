@@ -1,0 +1,328 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">2.1. Pandas para análisis de datos</h2>
+    <p style="margin: 0; font-size: 17px;">En el primer módulo aprendimos a trabajar con los elementos fundamentales de Python. A partir de ahora utilizaremos bibliotecas especializadas. Comenzaremos con Pandas, una biblioteca diseñada para cargar, organizar, limpiar y analizar datos tabulares. Sus objetos y métodos incorporan más posibilidades que los tipos básicos, pero siguen apoyándose en las mismas ideas: variables, listas, diccionarios, condiciones y funciones.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Importar Pandas</h3>
+  <p>Como vimos en la lección anterior, antes de utilizar una biblioteca debemos importarla. La convención habitual es asignar a Pandas el alias <code>pd</code>. Encontrarás este alias en la mayoría de cursos, notebooks y ejemplos de documentación.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span></code></pre>
+  </div>
+
+  <p>A partir de ese momento, las funciones y objetos de la biblioteca estarán disponibles a través de <code>pd</code>. Por ejemplo, <code>pd.DataFrame()</code> crea una tabla y <code>pd.read_csv()</code> carga una tabla desde un archivo CSV.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Los dos objetos principales: <code>Series</code> y <code>DataFrame</code></h3>
+  <p>Pandas utiliza principalmente dos tipos de objetos. Un <strong><code>DataFrame</code></strong> es una tabla formada por filas y columnas. Cada fila suele representar una observación —por ejemplo, una sesión de mercado— y cada columna contiene una variable, como la fecha, el precio de cierre o el volumen.</p>
+
+  <p>Una <strong><code>Series</code></strong> es una secuencia de valores acompañada por un índice. Podemos pensar en ella como una sola columna de un <code>DataFrame</code>. De hecho, al seleccionar una única columna de una tabla normalmente obtenemos una <code>Series</code>.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Objeto</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Estructura</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>Series</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una dimensión</td><td style="padding: 10px; border: 1px solid #cbd5df;">Una columna de precios de cierre</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>DataFrame</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Dos dimensiones: filas y columnas</td><td style="padding: 10px; border: 1px solid #cbd5df;">Un histórico con fecha, apertura, máximo, mínimo, cierre y volumen</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Ambos objetos poseen un <strong>índice</strong>, que identifica las filas. Si no indicamos uno, Pandas crea automáticamente las etiquetas <code>0</code>, <code>1</code>, <code>2</code> y así sucesivamente. El índice se parece a la numeración de una lista, aunque en Pandas también puede contener fechas o textos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Crear un <code>DataFrame</code></h3>
+  <p>Podemos crear una tabla a partir de un diccionario. Las claves se convierten en nombres de columnas y cada lista contiene sus valores. Todas las listas deben tener la misma longitud, porque cada posición corresponde a una fila.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+
+<span style="color: #0550ae;">datos</span> = {
+    <span style="color: #0a7b3e;">"Date"</span>: [<span style="color: #0a7b3e;">"2026-01-02"</span>, <span style="color: #0a7b3e;">"2026-01-05"</span>, <span style="color: #0a7b3e;">"2026-01-06"</span>,
+             <span style="color: #0a7b3e;">"2026-01-07"</span>, <span style="color: #0a7b3e;">"2026-01-08"</span>, <span style="color: #0a7b3e;">"2026-01-09"</span>],
+    <span style="color: #0a7b3e;">"Open"</span>: [<span style="color: #b35c00;">100.0</span>, <span style="color: #b35c00;">101.5</span>, <span style="color: #b35c00;">102.4</span>, <span style="color: #b35c00;">101.7</span>, <span style="color: #b35c00;">103.6</span>, <span style="color: #b35c00;">104.8</span>],
+    <span style="color: #0a7b3e;">"High"</span>: [<span style="color: #b35c00;">102.0</span>, <span style="color: #b35c00;">103.0</span>, <span style="color: #b35c00;">103.2</span>, <span style="color: #b35c00;">104.0</span>, <span style="color: #b35c00;">105.1</span>, <span style="color: #b35c00;">106.0</span>],
+    <span style="color: #0a7b3e;">"Low"</span>: [<span style="color: #b35c00;">99.5</span>, <span style="color: #b35c00;">100.8</span>, <span style="color: #b35c00;">101.0</span>, <span style="color: #b35c00;">101.4</span>, <span style="color: #b35c00;">103.2</span>, <span style="color: #b35c00;">104.1</span>],
+    <span style="color: #0a7b3e;">"Close"</span>: [<span style="color: #b35c00;">101.5</span>, <span style="color: #b35c00;">102.4</span>, <span style="color: #b35c00;">101.7</span>, <span style="color: #b35c00;">103.6</span>, <span style="color: #b35c00;">104.8</span>, <span style="color: #b35c00;">105.4</span>],
+    <span style="color: #0a7b3e;">"Volume"</span>: [<span style="color: #b35c00;">120000</span>, <span style="color: #b35c00;">135000</span>, <span style="color: #8250df;">None</span>, <span style="color: #b35c00;">150000</span>, <span style="color: #b35c00;">142000</span>, <span style="color: #b35c00;">158000</span>],
+}
+
+<span style="color: #0550ae;">mercado</span> = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">DataFrame</span>(<span style="color: #0550ae;">datos</span>)
+<span style="color: #0550ae;">mercado</span></code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 16px; overflow-x: auto; background: #fbfcfd;">
+      <table style="border-collapse: collapse; min-width: 690px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 13px;">
+        <thead><tr style="background: #eef2f6;"><th style="padding: 8px; border: 1px solid #cbd5df;"></th><th style="padding: 8px; border: 1px solid #cbd5df;">Date</th><th style="padding: 8px; border: 1px solid #cbd5df;">Open</th><th style="padding: 8px; border: 1px solid #cbd5df;">High</th><th style="padding: 8px; border: 1px solid #cbd5df;">Low</th><th style="padding: 8px; border: 1px solid #cbd5df;">Close</th><th style="padding: 8px; border: 1px solid #cbd5df;">Volume</th></tr></thead>
+        <tbody>
+          <tr><th style="padding: 8px; border: 1px solid #cbd5df;">0</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-02</td><td style="padding: 8px; border: 1px solid #cbd5df;">100.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">102.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">99.5</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.5</td><td style="padding: 8px; border: 1px solid #cbd5df;">120000.0</td></tr>
+          <tr style="background: #ffffff;"><th style="padding: 8px; border: 1px solid #cbd5df;">1</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-05</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.5</td><td style="padding: 8px; border: 1px solid #cbd5df;">103.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">100.8</td><td style="padding: 8px; border: 1px solid #cbd5df;">102.4</td><td style="padding: 8px; border: 1px solid #cbd5df;">135000.0</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #cbd5df;">2</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-06</td><td style="padding: 8px; border: 1px solid #cbd5df;">102.4</td><td style="padding: 8px; border: 1px solid #cbd5df;">103.2</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.7</td><td style="padding: 8px; border: 1px solid #cbd5df;">NaN</td></tr>
+          <tr style="background: #ffffff;"><th style="padding: 8px; border: 1px solid #cbd5df;">3</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-07</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.7</td><td style="padding: 8px; border: 1px solid #cbd5df;">104.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.4</td><td style="padding: 8px; border: 1px solid #cbd5df;">103.6</td><td style="padding: 8px; border: 1px solid #cbd5df;">150000.0</td></tr>
+          <tr><th style="padding: 8px; border: 1px solid #cbd5df;">4</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-08</td><td style="padding: 8px; border: 1px solid #cbd5df;">103.6</td><td style="padding: 8px; border: 1px solid #cbd5df;">105.1</td><td style="padding: 8px; border: 1px solid #cbd5df;">103.2</td><td style="padding: 8px; border: 1px solid #cbd5df;">104.8</td><td style="padding: 8px; border: 1px solid #cbd5df;">142000.0</td></tr>
+          <tr style="background: #ffffff;"><th style="padding: 8px; border: 1px solid #cbd5df;">5</th><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-09</td><td style="padding: 8px; border: 1px solid #cbd5df;">104.8</td><td style="padding: 8px; border: 1px solid #cbd5df;">106.0</td><td style="padding: 8px; border: 1px solid #cbd5df;">104.1</td><td style="padding: 8px; border: 1px solid #cbd5df;">105.4</td><td style="padding: 8px; border: 1px solid #cbd5df;">158000.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p>Pandas muestra <code>None</code> como <code>NaN</code>, la representación habitual de un valor ausente. Además, la columna <code>Volume</code> aparece con decimales porque una columna numérica que contiene <code>NaN</code> necesita un tipo capaz de representarlo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Cargar datos desde un archivo CSV</h3>
+  <p>Crear tablas a mano resulta útil para entender su estructura, pero lo habitual es trabajar con datos almacenados en archivos. Un archivo CSV contiene valores separados por comas y puede leerse con <code>pd.read_csv()</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+
+<span style="color: #0550ae;">mercado</span> = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">read_csv</span>(<span style="color: #0a7b3e;">"historico.csv"</span>)</code></pre>
+  </div>
+
+  <p>El texto entre comillas indica la ruta del archivo. Si el CSV está en la misma carpeta que el notebook, basta con su nombre. Si se encuentra en otra ubicación, hay que proporcionar la ruta correspondiente. <code>read_csv()</code> ofrece numerosos parámetros opcionales, por lo que podemos consultar <code>help(pd.read_csv)</code> cuando necesitemos controlar el separador, las columnas o la interpretación de los datos.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    Cargar un archivo no garantiza que sus datos estén preparados para el análisis. Después de leerlo conviene inspeccionar la tabla, revisar los tipos y buscar valores ausentes antes de realizar cálculos.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Primera inspección del <code>DataFrame</code></h3>
+  <p>Un dataset puede contener miles de filas, por lo que no resulta práctico mostrarlo entero. Pandas proporciona varios métodos y atributos para obtener una primera visión general.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 720px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Expresión</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Información que proporciona</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado.head()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Las cinco primeras filas.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado.tail()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Las cinco últimas filas.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado.shape</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una tupla con el número de filas y columnas.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado.info()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Columnas, valores no nulos, tipos y memoria aproximada.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>mercado.describe()</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Resumen estadístico de las columnas numéricas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #0550ae;">mercado</span>.<span style="color: #8250df;">head</span>(<span style="color: #b35c00;">3</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Primer resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>(6, 6)</code></pre>
+  </div>
+
+  <p>El resultado indica que la tabla tiene seis filas y seis columnas. Tanto <code>head()</code> como <code>tail()</code> aceptan el número de filas que queremos mostrar. Por su parte, <code>describe()</code> permite detectar rápidamente órdenes de magnitud extraños, aunque no sustituye a una revisión cuidadosa de los datos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Seleccionar columnas</h3>
+  <p>La forma más clara de seleccionar una columna consiste en escribir su nombre entre corchetes. El resultado es una <code>Series</code>. Si colocamos varios nombres dentro de una lista, obtenemos un nuevo <code>DataFrame</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">cierres</span> = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>]
+<span style="color: #0550ae;">fecha_y_cierre</span> = <span style="color: #0550ae;">mercado</span>[[<span style="color: #0a7b3e;">"Date"</span>, <span style="color: #0a7b3e;">"Close"</span>]]
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">cierres</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">fecha_y_cierre</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'pandas.core.series.Series'&gt;
+&lt;class 'pandas.core.frame.DataFrame'&gt;</code></pre>
+  </div>
+
+  <p>Los dobles corchetes del segundo caso tienen una explicación: los corchetes exteriores realizan la selección y los interiores delimitan la lista de columnas. También existe la escritura <code>mercado.Close</code>, pero <code>mercado["Close"]</code> funciona incluso cuando un nombre contiene espacios o coincide con el nombre de un método, por lo que suele ser la opción más segura.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Seleccionar filas con <code>iloc</code> y <code>loc</code></h3>
+  <p>Pandas ofrece dos selectores principales. <code>iloc</code> trabaja con la <strong>posición numérica</strong> de las filas y columnas. <code>loc</code> trabaja con sus <strong>etiquetas</strong> y también permite utilizar condiciones.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #6e7781;"># Primera fila por posición</span>
+<span style="color: #0550ae;">primera_fila</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">iloc</span>[<span style="color: #b35c00;">0</span>]
+
+<span style="color: #6e7781;"># Primeras tres filas y columnas Date y Close</span>
+<span style="color: #0550ae;">primeros_cierres</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">iloc</span>[:<span style="color: #b35c00;">3</span>, [<span style="color: #b35c00;">0</span>, <span style="color: #b35c00;">4</span>]]
+
+<span style="color: #6e7781;"># Valor de Close en la fila cuya etiqueta es 0</span>
+<span style="color: #0550ae;">primer_cierre</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">loc</span>[<span style="color: #b35c00;">0</span>, <span style="color: #0a7b3e;">"Close"</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">primer_cierre</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>101.5</code></pre>
+  </div>
+
+  <p>En ambos selectores se indica primero la fila y después la columna. El *slicing* de <code>iloc</code> funciona como en las listas: incluye el comienzo y excluye el final. Con <code>loc</code>, en cambio, un intervalo de etiquetas incluye también la etiqueta final.</p>
+
+  <p>Las condiciones producen una <code>Series</code> de valores booleanos que podemos utilizar dentro de <code>loc</code>. Por ejemplo, podemos seleccionar las sesiones cuyo cierre terminó por encima de la apertura:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">sesiones_alcistas</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">loc</span>[
+    <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>] &gt; <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Open"</span>],
+    [<span style="color: #0a7b3e;">"Date"</span>, <span style="color: #0a7b3e;">"Open"</span>, <span style="color: #0a7b3e;">"Close"</span>],
+]
+
+<span style="color: #0550ae;">sesiones_alcistas</span></code></pre>
+  </div>
+
+  <p>La expresión no modifica <code>mercado</code>: crea otro <code>DataFrame</code> con las filas y columnas seleccionadas.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Convertir una columna de fechas</h3>
+  <p>Al leer un CSV, Pandas puede interpretar una fecha como texto. Para trabajar correctamente con información temporal, conviene convertirla mediante <code>pd.to_datetime()</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Date"</span>] = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">to_datetime</span>(<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Date"</span>])
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Date"</span>].<span style="color: #0550ae;">dtype</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>datetime64[ns]</code></pre>
+  </div>
+
+  <p><code>dtype</code> indica cómo almacena Pandas los valores de una columna. Después de la conversión, <code>Date</code> deja de ser texto y pasa a ser una columna temporal. Esto permitirá ordenar, comparar y representar las fechas de forma coherente en operaciones posteriores.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Identificar y tratar valores ausentes</h3>
+  <p>Los datos reales pueden contener celdas vacías. Pandas suele representarlas como <code>NaN</code> o <code>NaT</code>, dependiendo del tipo de la columna. <code>isna()</code> marca cada valor ausente con <code>True</code> y <code>sum()</code> cuenta cuántos hay en cada columna.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">ausentes_por_columna</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #8250df;">isna</span>().<span style="color: #8250df;">sum</span>()
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">ausentes_por_columna</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Date      0
+Open      0
+High      0
+Low       0
+Close     0
+Volume    1
+dtype: int64</code></pre>
+  </div>
+
+  <p>Una vez identificado el problema, existen varias opciones. <code>dropna()</code> elimina las filas que contienen valores ausentes. <code>fillna()</code> los sustituye por un valor elegido. Para conservar la tabla original podemos trabajar sobre una copia.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #6e7781;"># Opción 1: eliminar las filas incompletas</span>
+<span style="color: #0550ae;">mercado_sin_ausentes</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #8250df;">dropna</span>()
+
+<span style="color: #6e7781;"># Opción 2: sustituir el volumen ausente por la mediana</span>
+<span style="color: #0550ae;">mercado_limpio</span> = <span style="color: #0550ae;">mercado</span>.<span style="color: #8250df;">copy</span>()
+<span style="color: #0550ae;">volumen_mediano</span> = <span style="color: #0550ae;">mercado_limpio</span>[<span style="color: #0a7b3e;">"Volume"</span>].<span style="color: #8250df;">median</span>()
+<span style="color: #0550ae;">mercado_limpio</span>[<span style="color: #0a7b3e;">"Volume"</span>] = <span style="color: #0550ae;">mercado_limpio</span>[<span style="color: #0a7b3e;">"Volume"</span>].<span style="color: #8250df;">fillna</span>(<span style="color: #0550ae;">volumen_mediano</span>)</code></pre>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #d97706; background: #fff8e6; border-radius: 6px;">
+    No existe una solución universal para los valores ausentes. Eliminar una fila puede descartar información útil y sustituir un valor introduce una estimación. La elección debe depender del significado de la columna y del análisis que se vaya a realizar.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Crear columnas calculadas</h3>
+  <p>Una de las ventajas de Pandas es que las operaciones sobre una <code>Series</code> se aplican a todos sus valores. No necesitamos recorrer manualmente las filas con un bucle para restar dos columnas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Rango"</span>] = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"High"</span>] - <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Low"</span>]
+<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Variacion"</span>] = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>] - <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Open"</span>]
+
+<span style="color: #0550ae;">mercado</span>[[<span style="color: #0a7b3e;">"Date"</span>, <span style="color: #0a7b3e;">"Rango"</span>, <span style="color: #0a7b3e;">"Variacion"</span>]].<span style="color: #8250df;">round</span>(<span style="color: #b35c00;">2</span>)</code></pre>
+  </div>
+
+  <p>La resta se realiza fila a fila porque ambas <code>Series</code> comparten el mismo índice. Después asignamos el resultado a un nuevo nombre de columna. Este tipo de operación vectorizada suele ser más claro y eficiente que un bucle escrito a mano.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Calcular retornos con <code>pct_change()</code></h3>
+  <p>El retorno entre dos cierres consecutivos se calcula dividiendo el precio actual por el anterior y restando uno. El método <code>pct_change()</code> realiza ese cálculo a lo largo de una <code>Series</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Retorno"</span>] = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>].<span style="color: #8250df;">pct_change</span>(<span style="color: #0550ae;">fill_method</span>=<span style="color: #8250df;">None</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Retorno"</span>].<span style="color: #8250df;">round</span>(<span style="color: #b35c00;">4</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0       NaN
+1    0.0089
+2   -0.0068
+3    0.0187
+4    0.0116
+5    0.0057
+Name: Retorno, dtype: float64</code></pre>
+  </div>
+
+  <p>La primera fila contiene <code>NaN</code> porque no existe un cierre anterior con el que compararla. Los retornos se expresan como proporciones: <code>0.0089</code> equivale aproximadamente a <code>0.89 %</code>. El argumento <code>fill_method=None</code> evita que Pandas sustituya automáticamente posibles precios ausentes antes de calcular el cambio.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">12. Calcular una media móvil con <code>rolling()</code></h3>
+  <p>Una operación de ventana utiliza un grupo móvil de filas. <code>rolling(window=3)</code> crea ventanas de tres observaciones y <code>mean()</code> calcula la media dentro de cada una.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Media_movil_3"</span>] = (
+    <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>]
+    .<span style="color: #8250df;">rolling</span>(<span style="color: #0550ae;">window</span>=<span style="color: #b35c00;">3</span>)
+    .<span style="color: #8250df;">mean</span>()
+)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Media_movil_3"</span>].<span style="color: #8250df;">round</span>(<span style="color: #b35c00;">2</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0       NaN
+1       NaN
+2    101.87
+3    102.57
+4    103.37
+5    104.60
+Name: Media_movil_3, dtype: float64</code></pre>
+  </div>
+
+  <p>Las dos primeras filas son <code>NaN</code> porque todavía no existen tres cierres para completar la ventana. En la tercera fila, por ejemplo, el resultado es la media de los cierres de las filas <code>0</code>, <code>1</code> y <code>2</code>. Aquí utilizamos una ventana pequeña para que el cálculo sea fácil de comprobar.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">13. Un flujo básico de análisis</h3>
+  <p>Las operaciones anteriores no suelen aparecer de forma aislada. Un primer análisis con Pandas sigue una secuencia parecida a esta:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+
+<span style="color: #6e7781;"># 1. Cargar</span>
+<span style="color: #0550ae;">mercado</span> = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">read_csv</span>(<span style="color: #0a7b3e;">"historico.csv"</span>)
+
+<span style="color: #6e7781;"># 2. Convertir la fecha e inspeccionar</span>
+<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Date"</span>] = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">to_datetime</span>(<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Date"</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">mercado</span>.<span style="color: #8250df;">isna</span>().<span style="color: #8250df;">sum</span>())
+
+<span style="color: #6e7781;"># 3. Crear columnas calculadas</span>
+<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Retorno"</span>] = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>].<span style="color: #8250df;">pct_change</span>(<span style="color: #0550ae;">fill_method</span>=<span style="color: #8250df;">None</span>)
+<span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Media_movil_3"</span>] = <span style="color: #0550ae;">mercado</span>[<span style="color: #0a7b3e;">"Close"</span>].<span style="color: #8250df;">rolling</span>(<span style="color: #b35c00;">3</span>).<span style="color: #8250df;">mean</span>()
+
+<span style="color: #6e7781;"># 4. Seleccionar el resultado que queremos revisar</span>
+<span style="color: #0550ae;">resultado</span> = <span style="color: #0550ae;">mercado</span>[[<span style="color: #0a7b3e;">"Date"</span>, <span style="color: #0a7b3e;">"Close"</span>, <span style="color: #0a7b3e;">"Retorno"</span>, <span style="color: #0a7b3e;">"Media_movil_3"</span>]]
+<span style="color: #0550ae;">resultado</span>.<span style="color: #8250df;">tail</span>()</code></pre>
+  </div>
+
+  <p>Este flujo no es una receta rígida. Su finalidad es adquirir un hábito útil: comprender la estructura y la calidad de los datos antes de calcular resultados. En análisis financiero, un error en una fecha, un precio ausente o una columna mal interpretada puede alterar todos los pasos posteriores.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Pandas se importa habitualmente mediante <code>import pandas as pd</code>.</li>
+      <li>Una <code>Series</code> representa una secuencia con índice y un <code>DataFrame</code> representa una tabla.</li>
+      <li><code>pd.DataFrame()</code> crea una tabla y <code>pd.read_csv()</code> carga datos desde un CSV.</li>
+      <li><code>head()</code>, <code>tail()</code>, <code>shape</code>, <code>info()</code> y <code>describe()</code> ayudan a inspeccionar los datos.</li>
+      <li>Los corchetes seleccionan columnas; <code>iloc</code> selecciona por posición y <code>loc</code> por etiquetas o condiciones.</li>
+      <li><code>pd.to_datetime()</code> convierte textos en fechas.</li>
+      <li><code>isna()</code>, <code>dropna()</code> y <code>fillna()</code> permiten identificar y tratar valores ausentes.</li>
+      <li>Las operaciones entre columnas crean resultados fila a fila sin necesidad de escribir un bucle.</li>
+      <li><code>pct_change()</code> calcula cambios relativos y <code>rolling().mean()</code> permite obtener una media móvil.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Pandas para análisis de datos</strong></a>.</p>
+
+</div>
