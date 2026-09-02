@@ -1,0 +1,343 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">2.4. Introducción a scikit-learn</h2>
+    <p style="margin: 0; font-size: 17px;">En las lecciones anteriores hemos preparado datos con Pandas, realizado operaciones con NumPy y representado resultados con Matplotlib y Seaborn. En esta última lección reuniremos esas piezas para construir un primer modelo de aprendizaje supervisado con scikit-learn.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Aprender patrones a partir de datos</h3>
+  <p>En el <strong>aprendizaje supervisado</strong> disponemos de observaciones para las que ya conocemos el resultado. Un modelo utiliza esos ejemplos para aprender una relación entre unos datos de entrada y el valor que queremos predecir. Después puede aplicar la relación aprendida a observaciones que no ha utilizado durante el entrenamiento.</p>
+
+  <p>La biblioteca se llama <strong>scikit-learn</strong>, aunque en las importaciones se escribe <code>sklearn</code>. Sus modelos comparten una interfaz muy consistente, por lo que el flujo de trabajo se mantiene aunque cambiemos de algoritmo:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Paso</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Pregunta</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Operación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Preparar</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué información utilizará el modelo y qué debe predecir?</td><td style="padding: 10px; border: 1px solid #cbd5df;">Definir <code>X</code> e <code>y</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Definir</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué tipo de modelo vamos a utilizar?</td><td style="padding: 10px; border: 1px solid #cbd5df;">Crear el estimador.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Entrenar</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué patrones aparecen en los ejemplos conocidos?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>fit()</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Predecir</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué resultado estima el modelo para datos nuevos?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>predict()</code>.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Evaluar</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Hasta qué punto se aproximan las predicciones a los valores reales?</td><td style="padding: 10px; border: 1px solid #cbd5df;">Calcular una métrica.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Regresión y clasificación</h3>
+  <p>El tipo de modelo depende principalmente de la variable que queremos predecir. En este curso distinguiremos dos tareas supervisadas:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Tarea</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Resultado</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Ejemplos de modelos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Regresión</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Predice un valor numérico, como <code>0.008</code> o <code>104.5</code>.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>LinearRegression</code>, <code>DecisionTreeRegressor</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Clasificación</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">Predice una categoría, como <code>"Positivo"</code> o <code>"Negativo"</code>.</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>LogisticRegression</code>, <code>DecisionTreeClassifier</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Nuestro ejemplo será de <strong>regresión</strong>, porque la variable objetivo es numérica. El propósito no es obtener un modelo útil para tomar decisiones reales, sino aprender la estructura común de scikit-learn.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Datos de partida</h3>
+  <p>Partiremos de un <code>DataFrame</code> llamado <code>datos_modelo</code> que ya está preparado y ordenado por fecha. Cada fila contiene tres variables conocidas en un momento determinado y un valor posterior que utilizaremos como objetivo:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 24px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Columna</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>Fecha</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Mantiene el orden temporal de las observaciones.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>Retorno_anterior</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Primera variable predictora.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>Media_movil_3</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Segunda variable predictora.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>Volatilidad_3</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Tercera variable predictora.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>Retorno_siguiente</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Variable objetivo que intentaremos predecir.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">matplotlib.pyplot</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">plt</span>
+
+<span style="color: #0550ae;">datos_modelo</span>.<span style="color: #8250df;">head</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fbfcfd;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="overflow-x: auto; padding: 14px;">
+      <table style="width: 100%; border-collapse: collapse; min-width: 700px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 13px;">
+        <thead><tr style="background: #eef5fb;"><th style="padding: 8px; border: 1px solid #cbd5df;">Fecha</th><th style="padding: 8px; border: 1px solid #cbd5df;">Retorno_anterior</th><th style="padding: 8px; border: 1px solid #cbd5df;">Media_movil_3</th><th style="padding: 8px; border: 1px solid #cbd5df;">Volatilidad_3</th><th style="padding: 8px; border: 1px solid #cbd5df;">Retorno_siguiente</th></tr></thead>
+        <tbody>
+          <tr><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-01</td><td style="padding: 8px; border: 1px solid #cbd5df;">-0.012</td><td style="padding: 8px; border: 1px solid #cbd5df;">100.4</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.009</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.006</td></tr>
+          <tr style="background: #ffffff;"><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-02</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.006</td><td style="padding: 8px; border: 1px solid #cbd5df;">100.8</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.008</td><td style="padding: 8px; border: 1px solid #cbd5df;">-0.004</td></tr>
+          <tr><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-03</td><td style="padding: 8px; border: 1px solid #cbd5df;">-0.004</td><td style="padding: 8px; border: 1px solid #cbd5df;">100.6</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.007</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.011</td></tr>
+          <tr style="background: #ffffff;"><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-04</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.011</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.1</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.008</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.003</td></tr>
+          <tr><td style="padding: 8px; border: 1px solid #cbd5df;">2026-01-05</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.003</td><td style="padding: 8px; border: 1px solid #cbd5df;">101.5</td><td style="padding: 8px; border: 1px solid #cbd5df;">0.006</td><td style="padding: 8px; border: 1px solid #cbd5df;">-0.008</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Separar las variables predictoras y el objetivo</h3>
+  <p>Por convención, llamamos <code>X</code> al conjunto de <strong>variables predictoras</strong>, también conocidas como <em>features</em>. Debe ser una estructura bidimensional: cada fila es una observación y cada columna, una variable. Llamamos <code>y</code> a la <strong>variable objetivo</strong> que queremos predecir.</p>
+
+  <p>La fecha sirve para ordenar y mostrar los resultados, pero no se la entregaremos al modelo. Seleccionaremos únicamente las tres columnas numéricas preparadas como variables predictoras.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">variables</span> = [
+    <span style="color: #0a7b3e;">"Retorno_anterior"</span>,
+    <span style="color: #0a7b3e;">"Media_movil_3"</span>,
+    <span style="color: #0a7b3e;">"Volatilidad_3"</span>,
+]
+
+<span style="color: #0550ae;">X</span> = <span style="color: #0550ae;">datos_modelo</span>[<span style="color: #0550ae;">variables</span>]
+<span style="color: #0550ae;">y</span> = <span style="color: #0550ae;">datos_modelo</span>[<span style="color: #0a7b3e;">"Retorno_siguiente"</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">X</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">y</span>.<span style="color: #0550ae;">shape</span>)</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fbfcfd;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>(16, 3)
+(16,)</code></pre>
+  </div>
+
+  <p><code>X</code> tiene dieciséis filas y tres columnas. <code>y</code> contiene los dieciséis resultados asociados. Ambos objetos deben conservar el mismo orden: la fila de una observación en <code>X</code> corresponde al valor situado en la misma posición de <code>y</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Separar entrenamiento y prueba de forma cronológica</h3>
+  <p>Evaluar el modelo con los mismos datos utilizados para entrenarlo puede producir una impresión engañosa. Un modelo podría recordar los ejemplos conocidos y, aun así, fallar con observaciones nuevas. Por eso reservaremos una parte de los datos para la prueba.</p>
+
+  <p>Cuando las filas siguen un orden temporal, no conviene mezclarlas al azar. Utilizaremos el primer 75&nbsp;% para entrenar y el último 25&nbsp;% para probar el modelo. <code>iloc</code> permite realizar este corte por posición:</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">corte</span> = <span style="color: #8250df;">int</span>(<span style="color: #8250df;">len</span>(<span style="color: #0550ae;">datos_modelo</span>) * <span style="color: #b35c00;">0.75</span>)
+
+<span style="color: #0550ae;">X_entrenamiento</span> = <span style="color: #0550ae;">X</span>.<span style="color: #0550ae;">iloc</span>[:<span style="color: #0550ae;">corte</span>]
+<span style="color: #0550ae;">X_prueba</span> = <span style="color: #0550ae;">X</span>.<span style="color: #0550ae;">iloc</span>[<span style="color: #0550ae;">corte</span>:]
+<span style="color: #0550ae;">y_entrenamiento</span> = <span style="color: #0550ae;">y</span>.<span style="color: #0550ae;">iloc</span>[:<span style="color: #0550ae;">corte</span>]
+<span style="color: #0550ae;">y_prueba</span> = <span style="color: #0550ae;">y</span>.<span style="color: #0550ae;">iloc</span>[<span style="color: #0550ae;">corte</span>:]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">X_entrenamiento</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">X_prueba</span>.<span style="color: #0550ae;">shape</span>)</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 24px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fbfcfd;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>(12, 3)
+(4, 3)</code></pre>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0 28px; border-left: 5px solid #d97706; background: #fff8e6; border-radius: 6px;">
+    <strong>Evitar información futura:</strong> las variables predictoras de una fila deben calcularse únicamente con información que ya estaría disponible en ese momento. Si una columna utiliza datos posteriores, el modelo aprenderá con una ventaja que no existiría al realizar una predicción real.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Definir el modelo</h3>
+  <p>Utilizaremos <code>DecisionTreeRegressor</code>, un árbol de decisión para valores numéricos. El modelo divide los ejemplos en grupos a partir de las variables predictoras y asigna una predicción a cada grupo.</p>
+
+  <p>Su constructor dispone de muchas opciones, pero para este primer ejemplo solo necesitamos dos:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Valor del ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>max_depth</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El número máximo de niveles del árbol. Una profundidad pequeña limita su complejidad.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>2</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>random_state</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Fija la parte aleatoria para obtener el mismo resultado al repetir el código.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>1</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">from</span> <span style="color: #0550ae;">sklearn.tree</span> <span style="color: #cf222e;">import</span> <span style="color: #0550ae;">DecisionTreeRegressor</span>
+
+<span style="color: #0550ae;">modelo</span> = <span style="color: #8250df;">DecisionTreeRegressor</span>(
+    <span style="color: #0550ae;">max_depth</span>=<span style="color: #b35c00;">2</span>,
+    <span style="color: #0550ae;">random_state</span>=<span style="color: #b35c00;">1</span>,
+)</code></pre>
+  </div>
+
+  <p>Crear el objeto no lo entrena todavía. En este momento solo hemos elegido el tipo de modelo y guardado su configuración.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Entrenar con <code>fit()</code></h3>
+  <p>El método <code>fit(X, y)</code> recibe las variables predictoras y los resultados conocidos. Durante esta llamada, el modelo aprende los patrones de los datos de entrenamiento.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead><tr style="background: #eef5fb;"><th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Entrada</th><th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Contenido</th><th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Forma</th></tr></thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>X_entrenamiento</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Variables predictoras de los ejemplos conocidos.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>(12, 3)</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>y_entrenamiento</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Resultado asociado a cada fila.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>(12,)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">modelo</span>.<span style="color: #8250df;">fit</span>(<span style="color: #0550ae;">X_entrenamiento</span>, <span style="color: #0550ae;">y_entrenamiento</span>)</code></pre>
+  </div>
+
+  <p>Después de ejecutar <code>fit()</code>, el objeto <code>modelo</code> conserva lo aprendido y ya puede utilizarse para generar predicciones. No debemos pasarle <code>X_prueba</code> durante el entrenamiento, porque necesitamos reservar esos datos para una evaluación independiente.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Predecir con <code>predict()</code></h3>
+  <p><code>predict(X)</code> recibe únicamente las variables predictoras. Las columnas deben ser las mismas, estar en el mismo orden y recibir el mismo tipo de preparación que durante el entrenamiento. El método devuelve un array de NumPy con una predicción por fila.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">predicciones</span> = <span style="color: #0550ae;">modelo</span>.<span style="color: #8250df;">predict</span>(<span style="color: #0550ae;">X_prueba</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">predicciones</span>)</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fbfcfd;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[0.0018 0.0018 0.009  0.0018]</code></pre>
+  </div>
+
+  <p>Las cuatro predicciones corresponden, en el mismo orden, a las cuatro filas de <code>X_prueba</code>. Obtener un resultado no significa que el modelo sea preciso; todavía debemos compararlo con los valores reales reservados en <code>y_prueba</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Evaluar con el error absoluto medio</h3>
+  <p>El <strong>error absoluto</strong> de una observación es la distancia entre su valor real y la predicción, sin importar cuál de los dos sea mayor:</p>
+
+  <div style="padding: 14px 18px; margin: 18px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px; font-family: Consolas, &quot;Courier New&quot;, monospace;">
+    error absoluto = abs(valor real - predicción)
+  </div>
+
+  <p>El <strong>error absoluto medio</strong>, conocido como MAE por sus siglas en inglés, calcula la media de esos errores. Se interpreta en las mismas unidades que la variable objetivo y siempre es mayor o igual que cero. Cuanto menor sea, más próximas estarán las predicciones a los valores reales.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">from</span> <span style="color: #0550ae;">sklearn.metrics</span> <span style="color: #cf222e;">import</span> <span style="color: #0550ae;">mean_absolute_error</span>
+
+<span style="color: #0550ae;">mae</span> = <span style="color: #8250df;">mean_absolute_error</span>(<span style="color: #0550ae;">y_prueba</span>, <span style="color: #0550ae;">predicciones</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">f"MAE: {mae:.5f}"</span>)</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fbfcfd;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>MAE: 0.00755</code></pre>
+  </div>
+
+  <p>Este valor indica que, en las observaciones de prueba, las predicciones se alejan del resultado real una media de <code>0.00755</code>. No existe un valor de MAE que sea bueno para todos los problemas: debe interpretarse según la escala del objetivo y compararse con otras referencias o modelos evaluados sobre los mismos datos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Comparar valores reales y predicciones</h3>
+  <p>Una métrica resume el resultado en un solo número, pero también conviene revisar cada predicción. Podemos reunir las fechas, los valores reales y las estimaciones en un <code>DataFrame</code>:</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">comparacion</span> = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">DataFrame</span>({
+    <span style="color: #0a7b3e;">"Fecha"</span>: <span style="color: #0550ae;">datos_modelo</span>.<span style="color: #0550ae;">loc</span>[<span style="color: #0550ae;">X_prueba</span>.<span style="color: #0550ae;">index</span>, <span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0a7b3e;">"Real"</span>: <span style="color: #0550ae;">y_prueba</span>,
+    <span style="color: #0a7b3e;">"Predicción"</span>: <span style="color: #0550ae;">predicciones</span>,
+})
+
+<span style="color: #0550ae;">comparacion</span></code></pre>
+  </div>
+
+  <div style="overflow-x: auto; margin: 12px 0 28px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 560px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 13px;">
+      <thead><tr style="background: #eef5fb;"><th style="padding: 9px; border: 1px solid #cbd5df;">Fecha</th><th style="padding: 9px; border: 1px solid #cbd5df;">Real</th><th style="padding: 9px; border: 1px solid #cbd5df;">Predicción</th></tr></thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;">2026-01-13</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.012</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.0018</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;">2026-01-14</td><td style="padding: 9px; border: 1px solid #cbd5df;">-0.005</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.0018</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;">2026-01-15</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.004</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.0090</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;">2026-01-16</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.010</td><td style="padding: 9px; border: 1px solid #cbd5df;">0.0018</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>También podemos reutilizar Matplotlib para observar la distancia entre ambas series. Como ya conocemos los parámetros de <code>plot()</code>, el código se concentra en representar las dos columnas:</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">figure</span>(<span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">8</span>, <span style="color: #b35c00;">4</span>))
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">plot</span>(
+    <span style="color: #0550ae;">comparacion</span>[<span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0550ae;">comparacion</span>[<span style="color: #0a7b3e;">"Real"</span>],
+    <span style="color: #0550ae;">color</span>=<span style="color: #0a7b3e;">"b"</span>,
+    <span style="color: #0550ae;">marker</span>=<span style="color: #0a7b3e;">"o"</span>,
+    <span style="color: #0550ae;">label</span>=<span style="color: #0a7b3e;">"Real"</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">plot</span>(
+    <span style="color: #0550ae;">comparacion</span>[<span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0550ae;">comparacion</span>[<span style="color: #0a7b3e;">"Predicción"</span>],
+    <span style="color: #0550ae;">color</span>=<span style="color: #0a7b3e;">"g"</span>,
+    <span style="color: #0550ae;">linestyle</span>=<span style="color: #0a7b3e;">"--"</span>,
+    <span style="color: #0550ae;">marker</span>=<span style="color: #0a7b3e;">"o"</span>,
+    <span style="color: #0550ae;">label</span>=<span style="color: #0a7b3e;">"Predicción"</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">title</span>(<span style="color: #0a7b3e;">"Valores reales y predicciones"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xlabel</span>(<span style="color: #0a7b3e;">"Fecha"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">ylabel</span>(<span style="color: #0a7b3e;">"Retorno"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">grid</span>(<span style="color: #0550ae;">alpha</span>=<span style="color: #b35c00;">0.3</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">legend</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xticks</span>(<span style="color: #0550ae;">comparacion</span>[<span style="color: #0a7b3e;">"Fecha"</span>], <span style="color: #0550ae;">rotation</span>=<span style="color: #b35c00;">20</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.4_predicciones.png" alt="Gráfico que compara los valores reales y las predicciones en cuatro fechas" width="1120" height="596" loading="lazy" style="display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>Las dos líneas no coinciden en todas las fechas, algo que también refleja el MAE. Esta comparación permite localizar en qué observaciones se producen las mayores diferencias, mientras que la métrica resume el error medio.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Qué demuestra este primer modelo</h3>
+  <p>El ejemplo muestra el flujo técnico de scikit-learn, pero un modelo entrenado con dieciséis observaciones no es suficiente para obtener conclusiones fiables. Una predicción es una estimación basada en patrones anteriores, no una certeza.</p>
+
+  <ul style="padding-left: 22px;">
+    <li>El conjunto de prueba debe permanecer separado del entrenamiento.</li>
+    <li>Las variables predictoras no deben contener información posterior al momento de la predicción.</li>
+    <li>Una métrica calculada sobre datos nuevos es más informativa que el error sobre los datos de entrenamiento.</li>
+    <li>El orden y los nombres de las columnas de <code>X_prueba</code> deben coincidir con los utilizados en <code>fit()</code>.</li>
+    <li>Una buena métrica técnica no convierte por sí sola un modelo en una herramienta válida para tomar decisiones.</li>
+  </ul>
+
+  <p>La selección avanzada de variables, el ajuste de parámetros, la validación temporal con varias ventanas, los <em>pipelines</em> y la comparación exhaustiva de modelos quedan fuera de esta introducción.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>En aprendizaje supervisado, el modelo aprende a relacionar unas variables predictoras con un resultado conocido.</li>
+      <li>La regresión predice valores numéricos y la clasificación predice categorías.</li>
+      <li><code>X</code> contiene las variables predictoras e <code>y</code>, la variable objetivo.</li>
+      <li>Los datos ordenados temporalmente se separan conservando el pasado para entrenar y el tramo posterior para probar.</li>
+      <li><code>fit()</code> entrena el modelo y <code>predict()</code> genera estimaciones para nuevas filas.</li>
+      <li><code>mean_absolute_error()</code> resume la distancia media entre los valores reales y las predicciones.</li>
+      <li>La evaluación debe realizarse con datos que el modelo no haya utilizado durante el entrenamiento.</li>
+      <li>Evitar información futura es esencial para obtener una evaluación válida.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de introducción a scikit-learn</strong></a>.</p>
+
+</div>

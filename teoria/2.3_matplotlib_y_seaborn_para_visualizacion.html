@@ -1,0 +1,387 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">2.3. Matplotlib y Seaborn para visualización</h2>
+    <p style="margin: 0; font-size: 17px;">En las lecciones anteriores utilizamos Pandas para organizar datos y NumPy para realizar cálculos numéricos. Ahora partiremos de esos resultados ya preparados para representarlos mediante gráficos. Matplotlib nos permitirá construir y personalizar figuras, mientras que Seaborn facilitará la creación de visualizaciones claras a partir de columnas de un <code>DataFrame</code>.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Importar Matplotlib y Seaborn</h3>
+  <p>Matplotlib es la biblioteca de visualización fundamental de Python. Normalmente importamos su módulo <code>pyplot</code> mediante el alias <code>plt</code>. Seaborn se apoya en Matplotlib y se importa habitualmente como <code>sns</code>.</p>
+
+  <p><code>sns.set_theme()</code> aplica un aspecto común a las figuras. Su parámetro <code>style</code> admite opciones como <code>"whitegrid"</code>, <code>"darkgrid"</code>, <code>"white"</code>, <code>"dark"</code> o <code>"ticks"</code>. También puede recibir <code>context</code> con valores como <code>"paper"</code>, <code>"notebook"</code>, <code>"talk"</code> o <code>"poster"</code> para adaptar el tamaño de los elementos al contexto de presentación.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">matplotlib.pyplot</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">plt</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">seaborn</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">sns</span>
+
+<span style="color: #0550ae;">sns</span>.<span style="color: #8250df;">set_theme</span>(<span style="color: #0550ae;">style</span>=<span style="color: #0a7b3e;">"whitegrid"</span>)</code></pre>
+  </div>
+
+  <p>Las dos bibliotecas pueden utilizarse juntas: es habitual dibujar con Seaborn y completar títulos, ejes o tamaños mediante Matplotlib.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Elegir el tipo de gráfico</h3>
+  <p>Antes de escribir código conviene decidir qué queremos observar. Cada tipo de gráfico responde mejor a una pregunta distinta:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Tipo</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Pregunta principal</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Función habitual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Líneas</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Cómo cambia una variable siguiendo un orden, normalmente temporal?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>plt.plot()</code> o <code>sns.lineplot()</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Histograma</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Cómo se distribuyen los valores de una variable numérica?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>plt.hist()</code> o <code>sns.histplot()</code></td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Dispersión</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué relación existe entre dos variables numéricas?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>plt.scatter()</code> o <code>sns.scatterplot()</code></td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><strong>Mapa de calor</strong></td><td style="padding: 10px; border: 1px solid #cbd5df;">¿Qué patrones aparecen en una tabla de valores o correlaciones?</td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>sns.heatmap()</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    Un gráfico ayuda a detectar tendencias, distribuciones y relaciones, pero no sustituye la comprobación numérica. Conviene utilizarlo junto con medidas como la media, la desviación estándar o la correlación.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Datos de partida</h3>
+  <p>En esta lección no crearemos ni transformaremos los datos. Partiremos de los siguientes objetos, que ya estarán cargados antes de ejecutar los ejemplos:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Objeto</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Tipo</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Contenido disponible</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>datos</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>DataFrame</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Columnas <code>Fecha</code>, <code>Cierre</code> y <code>Media_movil_3</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>retornos</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>Series</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Una serie numérica preparada para estudiar su distribución.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>comparacion</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>DataFrame</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Columnas <code>Retorno_A</code>, <code>Retorno_B</code> y <code>Periodo</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>retornos_activos</code></td><td style="padding: 10px; border: 1px solid #cbd5df;"><code>DataFrame</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Tres columnas numéricas con las que calcular una matriz de correlación.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>De este modo, el código de cada apartado se concentra únicamente en representar la información.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Representar una serie con Matplotlib</h3>
+  <p>Un gráfico de líneas conecta los valores siguiendo el orden recibido. En el eje horizontal colocaremos las fechas y en el vertical los precios de cierre. Añadiremos también una segunda línea para comparar la serie con su media móvil.</p>
+
+  <p>La forma más habitual de utilizar esta función es <code>plt.plot(x, y, ...)</code>. Los dos primeros argumentos indican qué datos se colocan en cada eje; el resto permite controlar el aspecto de la línea.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Opciones habituales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>x</code>, <code>y</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Los valores de los ejes horizontal y vertical.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Listas, arrays o columnas de un <code>DataFrame</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>color</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El color de la línea.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Abreviaturas como <code>"b"</code>, <code>"g"</code>, <code>"r"</code>, <code>"c"</code>, <code>"m"</code>, <code>"y"</code>, <code>"k"</code> o <code>"w"</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>linestyle</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El estilo del trazo.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>"-"</code>, <code>"--"</code>, <code>":"</code> o <code>"-."</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>linewidth</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El grosor de la línea.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un número como <code>1</code>, <code>2</code> o <code>3</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>marker</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El símbolo dibujado sobre cada observación.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>"o"</code>, <code>"s"</code>, <code>"^"</code> o <code>None</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>label</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El nombre que se mostrará en la leyenda.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Cualquier string descriptivo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Antes de dibujar utilizaremos <code>plt.figure(figsize=(ancho, alto))</code> para crear una figura con el tamaño indicado en pulgadas. Después podemos añadir contexto con <code>title()</code>, <code>xlabel()</code> y <code>ylabel()</code>. <code>legend()</code> muestra los textos definidos con <code>label</code>, <code>grid()</code> controla la cuadrícula y <code>show()</code> presenta el resultado.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">figure</span>(<span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">9</span>, <span style="color: #b35c00;">4</span>))
+
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">plot</span>(
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Cierre"</span>],
+    <span style="color: #0550ae;">color</span>=<span style="color: #0a7b3e;">"b"</span>,
+    <span style="color: #0550ae;">linewidth</span>=<span style="color: #b35c00;">2</span>,
+    <span style="color: #0550ae;">marker</span>=<span style="color: #0a7b3e;">"o"</span>,
+    <span style="color: #0550ae;">label</span>=<span style="color: #0a7b3e;">"Cierre"</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">plot</span>(
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Media_movil_3"</span>],
+    <span style="color: #0550ae;">color</span>=<span style="color: #0a7b3e;">"g"</span>,
+    <span style="color: #0550ae;">linestyle</span>=<span style="color: #0a7b3e;">"--"</span>,
+    <span style="color: #0550ae;">label</span>=<span style="color: #0a7b3e;">"Media móvil (3)"</span>,
+)
+
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">title</span>(<span style="color: #0a7b3e;">"Evolución del precio"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xlabel</span>(<span style="color: #0a7b3e;">"Fecha"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">ylabel</span>(<span style="color: #0a7b3e;">"Precio"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">grid</span>(<span style="color: #0550ae;">alpha</span>=<span style="color: #b35c00;">0.3</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">legend</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">tight_layout</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.3_lineas.png" alt="Gráfico de líneas con la evolución del precio y su media móvil" width="1241" height="520" loading="lazy" style="display: block; width: 100%; max-width: 820px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>El resultado permite distinguir las dos series por su color y por su estilo de línea. Los marcadores señalan las observaciones de la serie principal y la leyenda identifica cada elemento sin necesidad de incluir esa información dentro del área de dibujo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Visualizar una distribución con Seaborn</h3>
+  <p>Un histograma agrupa los valores numéricos en intervalos y muestra cuántas observaciones caen en cada uno. <code>sns.histplot()</code> permite añadir una curva de densidad suavizada mediante <code>kde=True</code>.</p>
+
+  <p>La función puede recibir directamente una <code>Series</code> o trabajar con una columna de un <code>DataFrame</code>. Sus parámetros principales son los siguientes:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Opciones habituales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>data</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Los datos que se van a representar.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Una <code>Series</code>, un array o un <code>DataFrame</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>x</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La columna numérica, si <code>data</code> es un <code>DataFrame</code>.</td><td style="padding: 9px; border: 1px solid #cbd5df;">El nombre de una columna.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>bins</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Cómo se dividen los valores en intervalos.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un entero, una lista de límites o <code>"auto"</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>kde</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Si se añade una curva de densidad suavizada.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>True</code> o <code>False</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>stat</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La medida mostrada en el eje vertical.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>"count"</code>, <code>"frequency"</code>, <code>"density"</code> o <code>"probability"</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>color</code>, <code>alpha</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El color y la transparencia de las barras.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un color y un valor de <code>0</code> a <code>1</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>En el ejemplo utilizaremos ocho intervalos y mantendremos el valor predeterminado de <code>stat="count"</code>, por lo que la altura de cada barra indicará el número de observaciones.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">figure</span>(<span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">8</span>, <span style="color: #b35c00;">4</span>))
+<span style="color: #0550ae;">sns</span>.<span style="color: #8250df;">histplot</span>(
+    <span style="color: #0550ae;">data</span>=<span style="color: #0550ae;">retornos</span>,
+    <span style="color: #0550ae;">bins</span>=<span style="color: #b35c00;">8</span>,
+    <span style="color: #0550ae;">kde</span>=<span style="color: #cf222e;">True</span>,
+    <span style="color: #0550ae;">color</span>=<span style="color: #0a7b3e;">"b"</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">title</span>(<span style="color: #0a7b3e;">"Distribución de los retornos"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xlabel</span>(<span style="color: #0a7b3e;">"Retorno"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">ylabel</span>(<span style="color: #0a7b3e;">"Frecuencia"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">tight_layout</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.3_distribucion.png" alt="Histograma con la distribución de los retornos y una curva de densidad" width="1121" height="536" loading="lazy" style="display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>El número de intervalos cambia el nivel de detalle: muy pocos pueden ocultar diferencias y demasiados pueden producir una figura irregular. La curva KDE ayuda a percibir la forma general, pero debe interpretarse junto con las barras y con el número de observaciones disponibles.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Comparar dos variables con un gráfico de dispersión</h3>
+  <p>En un gráfico de dispersión, cada punto combina un valor del eje horizontal con otro del eje vertical. <code>sns.scatterplot()</code> permite relacionar esas dos variables y utilizar el color, el tamaño o la forma para incorporar información adicional.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Opciones habituales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>data</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El <code>DataFrame</code> del que se toman las variables.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un <code>DataFrame</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>x</code>, <code>y</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Las variables de los ejes horizontal y vertical.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Nombres de columnas numéricas.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>hue</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La variable que determina el color de cada punto.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Una columna categórica o numérica.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>style</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La variable que determina la forma del marcador.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Normalmente, una columna categórica.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>s</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El tamaño de todos los puntos.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un número como <code>40</code>, <code>70</code> o <code>100</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>palette</code>, <code>alpha</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La paleta de colores y la transparencia.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Por ejemplo, <code>"deep"</code> y un valor de <code>0</code> a <code>1</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Cuando usamos <code>hue</code>, Seaborn crea automáticamente una leyenda con las categorías encontradas. En este caso el color distinguirá el periodo al que pertenece cada observación. También fijaremos las posiciones visibles de los ejes mediante <code>xticks()</code> y <code>yticks()</code>.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">figure</span>(<span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">6</span>, <span style="color: #b35c00;">5</span>))
+<span style="color: #0550ae;">sns</span>.<span style="color: #8250df;">scatterplot</span>(
+    <span style="color: #0550ae;">data</span>=<span style="color: #0550ae;">comparacion</span>,
+    <span style="color: #0550ae;">x</span>=<span style="color: #0a7b3e;">"Retorno_A"</span>,
+    <span style="color: #0550ae;">y</span>=<span style="color: #0a7b3e;">"Retorno_B"</span>,
+    <span style="color: #0550ae;">hue</span>=<span style="color: #0a7b3e;">"Periodo"</span>,
+    <span style="color: #0550ae;">s</span>=<span style="color: #b35c00;">90</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">title</span>(<span style="color: #0a7b3e;">"Relación entre dos series por periodo"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xlabel</span>(<span style="color: #0a7b3e;">"Retorno A"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">ylabel</span>(<span style="color: #0a7b3e;">"Retorno B"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">xticks</span>([-<span style="color: #b35c00;">0.005</span>, <span style="color: #b35c00;">0.000</span>, <span style="color: #b35c00;">0.005</span>, <span style="color: #b35c00;">0.010</span>])
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">yticks</span>([-<span style="color: #b35c00;">0.005</span>, <span style="color: #b35c00;">0.000</span>, <span style="color: #b35c00;">0.005</span>, <span style="color: #b35c00;">0.010</span>])
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">tight_layout</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.3_dispersion.png" alt="Gráfico de dispersión que compara dos series y distingue dos periodos" width="851" height="671" loading="lazy" style="display: block; width: 100%; max-width: 570px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>En el resultado, una nube ascendente sugiere una relación positiva y una descendente, una relación negativa. El color permite comprobar si el patrón cambia entre categorías. El gráfico ayuda a observar relaciones y posibles valores atípicos, pero no demuestra que una variable cause los cambios de la otra.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Combinar gráficos con <code>subplots</code></h3>
+  <p>Una <strong>figura</strong> es el lienzo completo y cada <strong>Axes</strong> es una zona de dibujo dentro de ella. <code>plt.subplots()</code> crea ambos objetos y permite colocar varios gráficos de forma ordenada. Seaborn puede dibujar en un <code>Axes</code> concreto mediante el argumento <code>ax</code>.</p>
+
+  <p>La llamada <code>plt.subplots(nrows, ncols, ...)</code> define la cuadrícula antes de dibujar. Estos son sus parámetros más útiles al comenzar:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Ejemplos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>nrows</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El número de filas.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>1</code>, <code>2</code>, <code>3</code>...</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>ncols</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El número de columnas.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>1</code>, <code>2</code>, <code>3</code>...</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>figsize</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El ancho y el alto de la figura completa.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>(10, 4)</code> o <code>(8, 6)</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>sharex</code>, <code>sharey</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Si los gráficos comparten la misma escala en un eje.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>True</code> o <code>False</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>La función devuelve dos elementos: la figura completa y los ejes creados. Al pedir una fila y dos columnas, <code>ejes[0]</code> será la zona izquierda y <code>ejes[1]</code> la derecha. El parámetro <code>ax</code> de las funciones de Seaborn nos permite elegir en cuál de ellas dibujar.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">figura</span>, <span style="color: #0550ae;">ejes</span> = <span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">subplots</span>(
+    <span style="color: #b35c00;">1</span>,
+    <span style="color: #b35c00;">2</span>,
+    <span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">12</span>, <span style="color: #b35c00;">4</span>),
+)
+
+<span style="color: #0550ae;">ejes</span>[<span style="color: #b35c00;">0</span>].<span style="color: #8250df;">plot</span>(
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Fecha"</span>],
+    <span style="color: #0550ae;">datos</span>[<span style="color: #0a7b3e;">"Cierre"</span>],
+    <span style="color: #0550ae;">marker</span>=<span style="color: #0a7b3e;">"o"</span>,
+)
+<span style="color: #0550ae;">ejes</span>[<span style="color: #b35c00;">0</span>].<span style="color: #8250df;">set_title</span>(<span style="color: #0a7b3e;">"Serie de precios"</span>)
+
+<span style="color: #0550ae;">sns</span>.<span style="color: #8250df;">histplot</span>(
+    <span style="color: #0550ae;">data</span>=<span style="color: #0550ae;">retornos</span>,
+    <span style="color: #0550ae;">bins</span>=<span style="color: #b35c00;">8</span>,
+    <span style="color: #0550ae;">ax</span>=<span style="color: #0550ae;">ejes</span>[<span style="color: #b35c00;">1</span>],
+)
+<span style="color: #0550ae;">ejes</span>[<span style="color: #b35c00;">1</span>].<span style="color: #8250df;">set_title</span>(<span style="color: #0a7b3e;">"Distribución de retornos"</span>)
+
+<span style="color: #0550ae;">figura</span>.<span style="color: #8250df;">suptitle</span>(<span style="color: #0a7b3e;">"Resumen de los datos"</span>)
+<span style="color: #0550ae;">figura</span>.<span style="color: #8250df;">tight_layout</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.3_subplots.png" alt="Figura con un gráfico de líneas y un histograma colocados en dos subplots" width="1601" height="552" loading="lazy" style="display: block; width: 100%; max-width: 880px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>Los métodos de cada <code>Axes</code> suelen comenzar por <code>set_</code>, como <code>set_title()</code>. En cambio, <code>suptitle()</code> pertenece a la figura y añade un título común. Finalmente, <code>tight_layout()</code> ajusta el espacio para reducir solapamientos entre títulos, ejes y etiquetas.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Visualizar correlaciones con un mapa de calor</h3>
+  <p>La correlación resume la relación lineal entre dos variables mediante un valor situado entre <code>-1</code> y <code>1</code>. Una vez calculada la matriz con <code>corr()</code>, <code>sns.heatmap()</code> asigna un color a cada valor y facilita su comparación.</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 22px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Parámetro</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Qué controla</th>
+          <th style="padding: 10px; border: 1px solid #cbd5df; text-align: left;">Opciones habituales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>data</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La tabla bidimensional que se representa mediante colores.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un array o un <code>DataFrame</code> numérico.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>annot</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Si se escribe el valor dentro de cada celda.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>True</code> o <code>False</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>fmt</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El formato de los valores escritos.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>".2f"</code> para dos decimales o <code>".0f"</code> sin decimales.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>cmap</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La paleta que convierte los números en colores.</td><td style="padding: 9px; border: 1px solid #cbd5df;"><code>"coolwarm"</code>, <code>"viridis"</code> o <code>"Blues"</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>vmin</code>, <code>vmax</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">Los extremos de la escala de color.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Para correlaciones, normalmente <code>-1</code> y <code>1</code>.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 9px; border: 1px solid #cbd5df;"><code>center</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">El valor que ocupa el centro visual de una paleta divergente.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Por ejemplo, <code>0</code>.</td></tr>
+        <tr><td style="padding: 9px; border: 1px solid #cbd5df;"><code>linewidths</code></td><td style="padding: 9px; border: 1px solid #cbd5df;">La separación visible entre las celdas.</td><td style="padding: 9px; border: 1px solid #cbd5df;">Un número como <code>0.5</code> o <code>1</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>En una matriz de correlación conviene mantener una escala fija entre <code>-1</code> y <code>1</code>. Así, el mismo color representa siempre el mismo valor y resulta más sencillo comparar diferentes mapas de calor.</p>
+
+  <div style="margin: 20px 0 12px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">correlaciones</span> = <span style="color: #0550ae;">retornos_activos</span>.<span style="color: #8250df;">corr</span>()
+
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">figure</span>(<span style="color: #0550ae;">figsize</span>=(<span style="color: #b35c00;">6</span>, <span style="color: #b35c00;">4</span>))
+<span style="color: #0550ae;">sns</span>.<span style="color: #8250df;">heatmap</span>(
+    <span style="color: #0550ae;">correlaciones</span>,
+    <span style="color: #0550ae;">annot</span>=<span style="color: #cf222e;">True</span>,
+    <span style="color: #0550ae;">cmap</span>=<span style="color: #0a7b3e;">"coolwarm"</span>,
+    <span style="color: #0550ae;">vmin</span>=-<span style="color: #b35c00;">1</span>,
+    <span style="color: #0550ae;">vmax</span>=<span style="color: #b35c00;">1</span>,
+    <span style="color: #0550ae;">fmt</span>=<span style="color: #0a7b3e;">".2f"</span>,
+)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">title</span>(<span style="color: #0a7b3e;">"Correlación entre series"</span>)
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">tight_layout</span>()
+<span style="color: #0550ae;">plt</span>.<span style="color: #8250df;">show</span>()</code></pre>
+  </div>
+
+  <div style="margin: 12px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <div style="padding: 14px; text-align: center;">
+      <img src="../output/imagenes/2.3_correlaciones.png" alt="Mapa de calor con la matriz de correlación entre tres series" width="823" height="580" loading="lazy" style="display: block; width: 100%; max-width: 570px; height: auto; margin: 0 auto; border: 0;">
+    </div>
+  </div>
+
+  <p>En el resultado, los tonos cálidos representan correlaciones positivas y los fríos, negativas. La diagonal vale <code>1</code> porque cada columna está perfectamente correlacionada consigo misma. Una correlación alta permite describir una relación lineal, pero no implica que una variable cause los cambios de la otra.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Buenas prácticas de representación</h3>
+  <p>Una figura útil no necesita reunir todas las opciones disponibles. Debería responder a una pregunta concreta y facilitar la lectura de los datos.</p>
+
+  <ul style="padding-left: 22px;">
+    <li>Utiliza un título que describa el contenido del gráfico.</li>
+    <li>Nombra los ejes e indica las unidades cuando sean necesarias.</li>
+    <li>Evita añadir demasiadas series, colores o elementos decorativos.</li>
+    <li>Usa una leyenda cuando el gráfico contenga varias series o categorías.</li>
+    <li>Combina colores con marcadores o estilos de línea cuando necesites distinguir elementos con claridad.</li>
+    <li>Revisa que la escala de los ejes no oculte ni exagere las diferencias.</li>
+    <li>Interpreta los patrones visuales junto con los cálculos numéricos.</li>
+  </ul>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>Matplotlib se importa habitualmente mediante <code>import matplotlib.pyplot as plt</code> y Seaborn mediante <code>import seaborn as sns</code>.</li>
+      <li>Los gráficos de líneas muestran evolución; los histogramas, distribuciones; y los gráficos de dispersión, relaciones entre variables.</li>
+      <li><code>figsize</code> controla el tamaño de una figura y <code>title()</code>, <code>xlabel()</code> y <code>ylabel()</code> añaden contexto.</li>
+      <li><code>label</code> junto con <code>legend()</code> permite identificar varias series.</li>
+      <li>Seaborn trabaja directamente con un <code>DataFrame</code> mediante <code>data</code> y nombres de columnas en <code>x</code>, <code>y</code> o <code>hue</code>.</li>
+      <li><code>plt.subplots()</code> crea una figura con varias zonas de dibujo.</li>
+      <li><code>sns.heatmap()</code> representa tablas numéricas mediante colores y resulta útil para visualizar correlaciones.</li>
+      <li><code>plt.tight_layout()</code> ajusta los márgenes y <code>plt.show()</code> muestra la figura.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de Matplotlib y Seaborn para visualización</strong></a>.</p>
+
+</div>

@@ -1,0 +1,382 @@
+<meta charset="UTF-8">
+<div style="max-width: 920px; margin: 0 auto; color: #243447; font-family: Arial, Helvetica, sans-serif; line-height: 1.65;">
+
+  <div style="padding: 28px; margin-bottom: 28px; border-radius: 12px; background: #f1f8ff; border-left: 6px solid #1f77b4;">
+    <h2 style="margin: 0 0 12px; color: #152536; font-size: 30px;">2.2. NumPy para operaciones numéricas</h2>
+    <p style="margin: 0; font-size: 17px;">En la lección anterior utilizamos Pandas para organizar datos en tablas y trabajar con columnas identificadas por su nombre. Ahora nos centraremos en NumPy, la biblioteca fundamental para realizar operaciones numéricas eficientes con arrays. Aprenderemos a crear y explorar estos objetos, operar sobre todos sus valores y obtener resultados estadísticos sencillos.</p>
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">1. Importar NumPy</h3>
+  <p>La convención habitual consiste en importar NumPy mediante el alias <code>np</code>. Es el nombre que encontraremos en la mayoría de notebooks, ejemplos y documentación.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span></code></pre>
+  </div>
+
+  <p>NumPy significa <em>Numerical Python</em>. Su objeto principal es el <code>ndarray</code>, que normalmente llamaremos simplemente <strong>array</strong>. Muchas bibliotecas científicas se apoyan en NumPy; Pandas, por ejemplo, utiliza arrays para almacenar buena parte de sus datos numéricos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">2. Crear un array</h3>
+  <p>Podemos crear un array pasando una lista a <code>np.array()</code>. El contenido se parece al de una lista, pero el tipo del objeto es diferente y ofrece operaciones especializadas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span>
+
+<span style="color: #0550ae;">precios_lista</span> = [<span style="color: #b35c00;">101.5</span>, <span style="color: #b35c00;">102.4</span>, <span style="color: #b35c00;">101.7</span>, <span style="color: #b35c00;">103.6</span>, <span style="color: #b35c00;">104.8</span>, <span style="color: #b35c00;">105.4</span>]
+<span style="color: #0550ae;">precios</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>(<span style="color: #0550ae;">precios_lista</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">precios</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'numpy.ndarray'&gt;
+[101.5 102.4 101.7 103.6 104.8 105.4]</code></pre>
+  </div>
+
+  <p>A diferencia de una lista, un array está pensado para contener valores de un mismo tipo. Si combinamos enteros y decimales, NumPy suele convertir los enteros a decimales para utilizar un tipo común. Esta homogeneidad permite realizar los cálculos de forma eficiente.</p>
+
+  <p><code>np.array()</code> es la forma más directa de crear un array a partir de datos que ya tenemos. NumPy también incluye funciones útiles para generar valores: <code>np.arange()</code> crea una secuencia con un paso determinado, <code>np.linspace()</code> reparte una cantidad de valores entre dos extremos y <code>np.zeros()</code> o <code>np.ones()</code> crean arrays inicializados con ceros o unos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">3. Propiedades de un array</h3>
+  <p>Antes de operar con un array conviene conocer su estructura. Sus propiedades principales se consultan sin paréntesis:</p>
+
+  <div style="overflow-x: auto; margin: 18px 0 26px;">
+    <table style="width: 100%; border-collapse: collapse; min-width: 620px;">
+      <thead>
+        <tr style="background: #eef5fb;">
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Propiedad</th>
+          <th style="padding: 11px; border: 1px solid #cbd5df; text-align: left;">Información</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>shape</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Tamaño de cada dimensión.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>size</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Número total de elementos.</td></tr>
+        <tr><td style="padding: 10px; border: 1px solid #cbd5df;"><code>dtype</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Tipo utilizado para almacenar los valores.</td></tr>
+        <tr style="background: #fafcfe;"><td style="padding: 10px; border: 1px solid #cbd5df;"><code>ndim</code></td><td style="padding: 10px; border: 1px solid #cbd5df;">Número de dimensiones.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #0550ae;">size</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #0550ae;">dtype</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>.<span style="color: #0550ae;">ndim</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>(6,)
+6
+float64
+1</code></pre>
+  </div>
+
+  <p>La forma <code>(6,)</code> indica que tenemos una única dimensión con seis elementos. La coma permite distinguir esa tupla de un número entre paréntesis. El tipo <code>float64</code> representa números decimales.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">4. Diferencias entre listas y arrays</h3>
+  <p>Las listas y los arrays pueden parecer similares, pero sus operadores no tienen siempre el mismo significado. Al sumar dos listas, Python las concatena. Al sumar un número a un array, NumPy aplica la suma a cada elemento.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios_lista</span> + [<span style="color: #b35c00;">1</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span> + <span style="color: #b35c00;">1</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[101.5, 102.4, 101.7, 103.6, 104.8, 105.4, 1]
+[102.5 103.4 102.7 104.6 105.8 106.4]</code></pre>
+  </div>
+
+  <p>Este comportamiento se conoce como <strong>operación vectorizada</strong>. No necesitamos escribir un bucle para aplicar la misma operación a todos los valores. Del mismo modo, <code>precios * 2</code> multiplica cada elemento por dos, mientras que una lista multiplicada por dos repite su contenido.</p>
+
+  <div style="padding: 16px 20px; margin: 22px 0; border-left: 5px solid #1f77b4; background: #f1f8ff; border-radius: 6px;">
+    Los operadores dependen del tipo de objeto. Cuando una expresión produzca un resultado inesperado, utiliza <code>type()</code>, revisa el <code>dtype</code> y consulta la documentación del objeto.
+  </div>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">5. Indexación y <em>slicing</em></h3>
+  <p>En un array de una dimensión utilizamos índices y <em>slicing</em> de la misma forma que en una lista. El primer elemento ocupa la posición <code>0</code> y los índices negativos cuentan desde el final.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>[<span style="color: #b35c00;">0</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>[-<span style="color: #b35c00;">1</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">precios</span>[<span style="color: #b35c00;">1</span>:<span style="color: #b35c00;">4</span>])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>101.5
+105.4
+[102.4 101.7 103.6]</code></pre>
+  </div>
+
+  <p>El intervalo <code>1:4</code> incluye las posiciones <code>1</code>, <code>2</code> y <code>3</code>, pero excluye la posición <code>4</code>. Conviene recordar además que muchos <em>slices</em> de NumPy son vistas de los datos originales. Si necesitamos una copia independiente que podamos modificar sin afectar al array inicial, utilizaremos <code>precios[1:4].copy()</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">6. Arrays de dos dimensiones</h3>
+  <p>Un array también puede tener varias dimensiones. En el siguiente ejemplo tenemos dos filas y tres columnas. NumPy no almacena nombres para ellas, por lo que debemos conocer qué representa cada posición o conservar esa información en otra estructura.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">retornos_activos</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([
+    [<span style="color: #b35c00;">0.010</span>, <span style="color: #b35c00;">0.004</span>, -<span style="color: #b35c00;">0.002</span>],
+    [-<span style="color: #b35c00;">0.005</span>, <span style="color: #b35c00;">0.008</span>, <span style="color: #b35c00;">0.003</span>],
+])
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_activos</span>.<span style="color: #0550ae;">shape</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_activos</span>[<span style="color: #b35c00;">1</span>, <span style="color: #b35c00;">2</span>])
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_activos</span>[:, <span style="color: #b35c00;">0</span>])</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>(2, 3)
+0.003
+[ 0.01  -0.005]</code></pre>
+  </div>
+
+  <p>La forma <code>(2, 3)</code> indica dos filas y tres columnas. La expresión <code>[1, 2]</code> selecciona la segunda fila y la tercera columna. En <code>[:, 0]</code>, los dos puntos significan «todas las filas» y el <code>0</code> selecciona la primera columna.</p>
+
+  <p>También podemos reorganizar los valores con <code>reshape()</code>. Por ejemplo, <code>np.arange(6).reshape(2, 3)</code> crea los números del <code>0</code> al <code>5</code> y los distribuye en dos filas y tres columnas. La nueva forma debe contener el mismo número total de elementos que el array original.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">7. Aritmética con arrays</h3>
+  <p>Las operaciones aritméticas pueden combinar un array con un único número o con otro array compatible. La suma, la resta, la multiplicación, la división y la potencia se aplican elemento a elemento, sin necesidad de escribir un bucle. Los operadores <code>//</code> y <code>%</code> también funcionan con arrays y calculan, respectivamente, la división entera y el resto de cada posición.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">a</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([<span style="color: #b35c00;">10</span>, <span style="color: #b35c00;">20</span>, <span style="color: #b35c00;">30</span>])
+<span style="color: #0550ae;">b</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([<span style="color: #b35c00;">2</span>, <span style="color: #b35c00;">4</span>, <span style="color: #b35c00;">5</span>])
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">a</span> + <span style="color: #0550ae;">b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">a</span> - <span style="color: #0550ae;">b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">a</span> * <span style="color: #0550ae;">b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">a</span> / <span style="color: #0550ae;">b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">a</span> ** <span style="color: #b35c00;">2</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[12 24 35]
+[ 8 16 25]
+[ 20  80 150]
+[5. 5. 6.]
+[100 400 900]</code></pre>
+  </div>
+
+  <p>NumPy empareja los valores que ocupan la misma posición. Por ejemplo, el primer elemento de <code>a * b</code> es <code>10 * 2</code>. Si escribimos <code>a + 1</code> o <code>a / 10</code>, el mismo número se aplica a todos los elementos del array. NumPy también proporciona funciones como <code>np.add()</code>, <code>np.subtract()</code>, <code>np.multiply()</code> y <code>np.divide()</code>, equivalentes a los operadores anteriores.</p>
+
+  <p>Otras funciones matemáticas habituales, como <code>np.sqrt()</code>, <code>np.exp()</code> y <code>np.log()</code>, siguen la misma idea: reciben un array y calculan la raíz cuadrada, la exponencial o el logaritmo de cada elemento. Si las formas de dos arrays no son compatibles, la operación produce un error o aplica unas reglas de ajuste denominadas <em>broadcasting</em>. En esta introducción utilizaremos arrays con la misma forma o combinaremos un array con un único número.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">8. Aritmética en dos dimensiones</h3>
+  <p>Las mismas reglas se aplican a los arrays de dos dimensiones. Los operadores <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y <code>**</code> continúan actuando elemento a elemento. Además, podemos multiplicar todos los valores por un escalar o transponer el array con <code>.T</code>, que intercambia sus filas y columnas.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">matriz_a</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([
+    [<span style="color: #b35c00;">1</span>, <span style="color: #b35c00;">2</span>],
+    [<span style="color: #b35c00;">3</span>, <span style="color: #b35c00;">4</span>],
+])
+
+<span style="color: #0550ae;">matriz_b</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([
+    [<span style="color: #b35c00;">5</span>, <span style="color: #b35c00;">6</span>],
+    [<span style="color: #b35c00;">7</span>, <span style="color: #b35c00;">8</span>],
+])
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">matriz_a</span> + <span style="color: #0550ae;">matriz_b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">matriz_a</span> * <span style="color: #b35c00;">2</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">matriz_a</span> * <span style="color: #0550ae;">matriz_b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">matriz_a</span> @ <span style="color: #0550ae;">matriz_b</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">matriz_a</span>.<span style="color: #0550ae;">T</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[[ 6  8]
+ [10 12]]
+[[2 4]
+ [6 8]]
+[[ 5 12]
+ [21 32]]
+[[19 22]
+ [43 50]]
+[[1 3]
+ [2 4]]</code></pre>
+  </div>
+
+  <p>Los tres primeros cálculos siguen siendo operaciones elemento a elemento. La expresión <code>matriz_a * matriz_b</code>, por ejemplo, multiplica <code>1 * 5</code>, <code>2 * 6</code> y así sucesivamente. El operador <code>@</code> tiene un significado distinto: realiza una <strong>multiplicación matricial</strong>. Para obtener su primer resultado, combina la primera fila de <code>matriz_a</code> con la primera columna de <code>matriz_b</code>: <code>1 * 5 + 2 * 7 = 19</code>.</p>
+
+  <p>La multiplicación matricial solo es posible cuando el número de columnas de la primera matriz coincide con el número de filas de la segunda. Una matriz con forma <code>(2, 3)</code> puede multiplicarse por otra con forma <code>(3, 4)</code>, y el resultado tendrá forma <code>(2, 4)</code>. <code>np.matmul(matriz_a, matriz_b)</code> realiza la misma operación que <code>matriz_a @ matriz_b</code>. Cuando <code>@</code> se utiliza con dos arrays de una dimensión, calcula su producto escalar.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">9. Combinar <em>slices</em> en un cálculo</h3>
+  <p>Podemos combinar dos <em>slices</em> para operar con elementos consecutivos. <code>precios[1:]</code> contiene todos los valores salvo el primero y <code>precios[:-1]</code> contiene todos salvo el último. Ambos tienen cinco elementos y quedan alineados posición a posición.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">retornos</span> = <span style="color: #0550ae;">precios</span>[<span style="color: #b35c00;">1</span>:] / <span style="color: #0550ae;">precios</span>[:-<span style="color: #b35c00;">1</span>] - <span style="color: #b35c00;">1</span>
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos</span>.<span style="color: #8250df;">round</span>(<span style="color: #b35c00;">4</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[ 0.0089 -0.0068  0.0187  0.0116  0.0057]</code></pre>
+  </div>
+
+  <p>El array resultante tiene un elemento menos que el original, porque no existe un valor anterior para la primera posición. La expresión divide cada elemento por el anterior y resta uno. Es la misma operación relativa que realiza <code>pct_change()</code> en Pandas, pero aquí la construimos explícitamente mediante NumPy.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">10. Comparaciones vectorizadas y filtros</h3>
+  <p>Una comparación aplicada a un array produce otro array de valores booleanos. Esa máscara puede utilizarse para seleccionar únicamente los elementos que cumplen la condición.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">es_positivo</span> = <span style="color: #0550ae;">retornos</span> &gt; <span style="color: #b35c00;">0</span>
+<span style="color: #0550ae;">retornos_positivos</span> = <span style="color: #0550ae;">retornos</span>[<span style="color: #0550ae;">es_positivo</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">es_positivo</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_positivos</span>.<span style="color: #8250df;">round</span>(<span style="color: #b35c00;">4</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[ True False  True  True  True]
+[0.0089 0.0187 0.0116 0.0057]</code></pre>
+  </div>
+
+  <p>La máscara y el array original deben tener la misma longitud. Para combinar varias condiciones sobre arrays utilizamos <code>&amp;</code> para «y» y <code>|</code> para «o», colocando cada comparación entre paréntesis. Por ejemplo, <code>retornos[(retornos &gt; 0) &amp; (retornos &lt; 0.01)]</code> selecciona los elementos positivos inferiores a <code>0.01</code>.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">11. Agregaciones y desviación estándar</h3>
+  <p>NumPy incluye funciones para resumir todos los valores de un array. Entre las más habituales se encuentran <code>mean()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code> y <code>std()</code>.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">retorno_medio</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">mean</span>(<span style="color: #0550ae;">retornos</span>)
+<span style="color: #0550ae;">sesiones_positivas</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">retornos</span> &gt; <span style="color: #b35c00;">0</span>)
+<span style="color: #0550ae;">retorno_minimo</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">min</span>(<span style="color: #0550ae;">retornos</span>)
+<span style="color: #0550ae;">retorno_maximo</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">max</span>(<span style="color: #0550ae;">retornos</span>)
+<span style="color: #0550ae;">volatilidad_diaria</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">std</span>(<span style="color: #0550ae;">retornos</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">retorno_medio</span>), <span style="color: #b35c00;">4</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">int</span>(<span style="color: #0550ae;">sesiones_positivas</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">retorno_minimo</span>), <span style="color: #b35c00;">4</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">retorno_maximo</span>), <span style="color: #b35c00;">4</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">volatilidad_diaria</span>), <span style="color: #b35c00;">4</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>0.0076
+4
+-0.0068
+0.0187
+0.0084</code></pre>
+  </div>
+
+  <p>Los valores booleanos se comportan como <code>1</code> y <code>0</code> al sumarlos, por eso <code>np.sum(retornos &gt; 0)</code> cuenta cuántos elementos cumplen la comparación. <code>np.std()</code> calcula la desviación estándar, una medida de cuánto se separan los valores respecto a su media.</p>
+
+  <p>En un array de dos dimensiones, el argumento <code>axis</code> permite elegir la dirección del cálculo: <code>axis=0</code> obtiene un resultado por cada columna y <code>axis=1</code> obtiene uno por cada fila. Por ejemplo, <code>np.mean(retornos_activos, axis=0)</code> calcula la media de cada una de sus tres columnas.</p>
+
+  <p>El siguiente ejemplo muestra cómo reutilizar un resultado, llamar a <code>np.sqrt()</code> y combinar ambas cantidades mediante una multiplicación. El número <code>252</code> es simplemente uno de los datos de entrada elegidos para el ejemplo:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">volatilidad_anual</span> = <span style="color: #0550ae;">volatilidad_diaria</span> * <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">sqrt</span>(<span style="color: #b35c00;">252</span>)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0a7b3e;">f"Volatilidad anual: {</span><span style="color: #0550ae;">volatilidad_anual</span><span style="color: #0a7b3e;">:.2%}"</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>Volatilidad anual: 13.32%</code></pre>
+  </div>
+
+  <p>Desde el punto de vista de Python, lo importante es observar que el resultado de una función puede intervenir directamente en otra expresión y que <code>:.2%</code> presenta un decimal con formato porcentual. La interpretación especializada de la variable pertenece al contexto del ejemplo y no es necesaria para comprender el código.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">12. Elegir valores con <code>np.where()</code></h3>
+  <p><code>np.where()</code> permite escoger entre dos valores según una condición. Recibe tres argumentos: la condición, el valor utilizado cuando se cumple y el valor utilizado cuando no se cumple.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">clasificacion</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">where</span>(
+    <span style="color: #0550ae;">retornos</span> &gt; <span style="color: #b35c00;">0</span>,
+    <span style="color: #0a7b3e;">"Positivo"</span>,
+    <span style="color: #0a7b3e;">"Negativo"</span>,
+)
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">clasificacion</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>['Positivo' 'Negativo' 'Positivo' 'Positivo' 'Positivo']</code></pre>
+  </div>
+
+  <p><code>np.where()</code> no elimina elementos: devuelve un resultado para cada posición. Si queremos filtrar y reducir la longitud del array, utilizamos una máscara como hicimos en el apartado anterior.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">13. Valores ausentes con <code>NaN</code></h3>
+  <p>NumPy representa muchos valores numéricos ausentes mediante <code>np.nan</code>. <code>NaN</code> significa <em>Not a Number</em>, pero no equivale a cero. La mayoría de operaciones normales propagan el valor ausente.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #0550ae;">retornos_incompletos</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([<span style="color: #b35c00;">0.0089</span>, <span style="color: #0550ae;">np</span>.<span style="color: #0550ae;">nan</span>, -<span style="color: #b35c00;">0.0068</span>, <span style="color: #b35c00;">0.0187</span>])
+
+<span style="color: #0550ae;">es_ausente</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">isnan</span>(<span style="color: #0550ae;">retornos_incompletos</span>)
+<span style="color: #0550ae;">retornos_validos</span> = <span style="color: #0550ae;">retornos_incompletos</span>[~<span style="color: #0550ae;">es_ausente</span>]
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">es_ausente</span>)
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">es_ausente</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">mean</span>(<span style="color: #0550ae;">retornos_incompletos</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">nanmean</span>(<span style="color: #0550ae;">retornos_incompletos</span>)), <span style="color: #b35c00;">4</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">retornos_validos</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>[False  True False False]
+1
+nan
+0.0069
+[ 0.0089 -0.0068  0.0187]</code></pre>
+  </div>
+
+  <p><code>np.isnan()</code> genera una máscara que identifica los valores ausentes. El operador <code>~</code> invierte esa máscara y permite seleccionar los valores válidos. Funciones como <code>np.nanmean()</code>, <code>np.nansum()</code> o <code>np.nanstd()</code> ignoran los <code>NaN</code>, pero debemos utilizarlas solo cuando tenga sentido excluir esos datos del cálculo.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">14. Trabajar con Pandas y NumPy</h3>
+  <p>Pandas y NumPy no son alternativas excluyentes. Pandas resulta cómodo para conservar etiquetas, fechas y columnas; NumPy proporciona herramientas numéricas sobre los valores. El método <code>to_numpy()</code> convierte una <code>Series</code> o un <code>DataFrame</code> en un array.</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">pandas</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">pd</span>
+<span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span>
+
+<span style="color: #0550ae;">serie_cierres</span> = <span style="color: #0550ae;">pd</span>.<span style="color: #8250df;">Series</span>(
+    [<span style="color: #b35c00;">101.5</span>, <span style="color: #b35c00;">102.4</span>, <span style="color: #b35c00;">101.7</span>, <span style="color: #b35c00;">103.6</span>],
+    <span style="color: #0550ae;">name</span>=<span style="color: #0a7b3e;">"Close"</span>,
+)
+
+<span style="color: #0550ae;">array_cierres</span> = <span style="color: #0550ae;">serie_cierres</span>.<span style="color: #8250df;">to_numpy</span>()
+
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">serie_cierres</span>))
+<span style="color: #8250df;">print</span>(<span style="color: #8250df;">type</span>(<span style="color: #0550ae;">array_cierres</span>))</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>&lt;class 'pandas.core.series.Series'&gt;
+&lt;class 'numpy.ndarray'&gt;</code></pre>
+  </div>
+
+  <p>Al convertir una <code>Series</code>, el array conserva sus valores, pero no el nombre ni las etiquetas del índice. Por eso suele ser conveniente mantener los datos originales en Pandas y utilizar NumPy cuando necesitamos realizar cálculos numéricos concretos.</p>
+
+  <h3 style="margin-top: 34px; color: #152536; border-bottom: 2px solid #e6edf3; padding-bottom: 8px;">15. Un flujo numérico completo</h3>
+  <p>Podemos reunir las operaciones principales de la lección en un único flujo de transformación y resumen de un array:</p>
+
+  <div style="margin: 20px 0 28px; border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #ffffff;">
+    <div style="padding: 8px 14px; background: #f6f8fa; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Código</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #ffffff; font-size: 14px; line-height: 1.55;"><code class="language-python" style="display: block; white-space: pre; tab-size: 4; font-family: Consolas, &quot;Courier New&quot;, monospace;"><span style="color: #cf222e;">import</span> <span style="color: #0550ae;">numpy</span> <span style="color: #cf222e;">as</span> <span style="color: #0550ae;">np</span>
+
+<span style="color: #0550ae;">precios</span> = <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">array</span>([<span style="color: #b35c00;">101.5</span>, <span style="color: #b35c00;">102.4</span>, <span style="color: #b35c00;">101.7</span>, <span style="color: #b35c00;">103.6</span>, <span style="color: #b35c00;">104.8</span>, <span style="color: #b35c00;">105.4</span>])
+<span style="color: #0550ae;">retornos</span> = <span style="color: #0550ae;">precios</span>[<span style="color: #b35c00;">1</span>:] / <span style="color: #0550ae;">precios</span>[:-<span style="color: #b35c00;">1</span>] - <span style="color: #b35c00;">1</span>
+
+<span style="color: #0550ae;">resumen</span> = {
+    <span style="color: #0a7b3e;">"sesiones_analizadas"</span>: <span style="color: #8250df;">len</span>(<span style="color: #0550ae;">retornos</span>),
+    <span style="color: #0a7b3e;">"sesiones_positivas"</span>: <span style="color: #8250df;">int</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">sum</span>(<span style="color: #0550ae;">retornos</span> &gt; <span style="color: #b35c00;">0</span>)),
+    <span style="color: #0a7b3e;">"retorno_medio"</span>: <span style="color: #8250df;">round</span>(<span style="color: #8250df;">float</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">mean</span>(<span style="color: #0550ae;">retornos</span>)), <span style="color: #b35c00;">4</span>),
+    <span style="color: #0a7b3e;">"volatilidad_anual"</span>: <span style="color: #8250df;">round</span>(
+        <span style="color: #8250df;">float</span>(<span style="color: #0550ae;">np</span>.<span style="color: #8250df;">std</span>(<span style="color: #0550ae;">retornos</span>) * <span style="color: #0550ae;">np</span>.<span style="color: #8250df;">sqrt</span>(<span style="color: #b35c00;">252</span>)),
+        <span style="color: #b35c00;">4</span>,
+    ),
+}
+
+<span style="color: #8250df;">print</span>(<span style="color: #0550ae;">resumen</span>)</code></pre>
+    <div style="padding: 8px 14px; background: #f6f8fa; border-top: 1px solid #ccd6e0; border-bottom: 1px solid #ccd6e0; color: #576574; font-size: 13px; font-weight: 700;">Resultado</div>
+    <pre style="margin: 0; padding: 18px; overflow-x: auto; background: #fbfcfd; color: #263238; font-size: 14px; line-height: 1.55;"><code>{'sesiones_analizadas': 5, 'sesiones_positivas': 4, 'retorno_medio': 0.0076, 'volatilidad_anual': 0.1332}</code></pre>
+  </div>
+
+  <p>El flujo crea un array, calcula cambios relativos entre elementos consecutivos y obtiene varias medidas sin escribir un bucle. El siguiente paso será aprender a representar visualmente este tipo de resultados.</p>
+
+  <div style="padding: 22px 24px; margin: 34px 0; border: 1px solid #cbd5df; border-radius: 10px; background: #f8fafc;">
+    <h3 style="margin-top: 0; color: #152536;">Resumen</h3>
+    <ul style="margin-bottom: 0; padding-left: 22px;">
+      <li>NumPy se importa habitualmente mediante <code>import numpy as np</code>.</li>
+      <li><code>np.array()</code> crea arrays a partir de otros datos; <code>np.arange()</code>, <code>np.linspace()</code>, <code>np.zeros()</code> y <code>np.ones()</code> permiten generarlos directamente.</li>
+      <li><code>shape</code>, <code>size</code>, <code>dtype</code> y <code>ndim</code> describen la estructura de un array.</li>
+      <li>Los arrays admiten indexación y <em>slicing</em> en una o varias dimensiones.</li>
+      <li>Los operadores <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y <code>**</code> actúan elemento a elemento sin necesidad de escribir bucles.</li>
+      <li><code>*</code> multiplica elemento a elemento; <code>@</code> y <code>np.matmul()</code> realizan una multiplicación matricial.</li>
+      <li>El atributo <code>.T</code> intercambia las filas y las columnas de un array de dos dimensiones.</li>
+      <li>Las comparaciones producen máscaras booleanas que permiten filtrar valores.</li>
+      <li><code>mean()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code> y <code>std()</code> resumen los datos.</li>
+      <li><code>np.where()</code> elige valores según una condición.</li>
+      <li><code>np.isnan()</code> identifica valores ausentes y las funciones que comienzan por <code>nan</code> pueden ignorarlos en los cálculos.</li>
+      <li><code>to_numpy()</code> permite extraer los valores de un objeto de Pandas como array.</li>
+    </ul>
+  </div>
+
+  <h2 style="color: #152536;">Tu turno</h2>
+  <!-- Sustituir # por la URL pública del notebook de Google Colab. -->
+  <p>Continúa aquí con los <a href="#"><strong>ejercicios de NumPy para operaciones numéricas</strong></a>.</p>
+
+</div>
